@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Frank Imler is a Creative Director and UX designer in Salt Lake City, Utah. 15 years of campaigns, brands and digital products that get noticed and get results.">
+<meta property="og:title" content="Frank Imler | Creative Director">
+<meta property="og:description" content="Creative Director by title. UX designer by obsession.">
+<meta property="og:image" content="https://cdn.myportfolio.com/65f6d075-e6f2-4852-9a29-1ee21f913631/ee2ee1a8-1583-4fbf-bd57-a104ac03a319_rw_3840.png?h=fe2b06611091da2abce0e23ac92677e2">
+<meta property="og:url" content="https://imler.co/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://imler.co/">
+<title>Frank Imler | Creative Director</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: framed dark hero panel on a paper ground, floating nav, full-bleed rounded case cards, index-style archive. Single committed look. */
+:root{
+  --paper:#EEEBE4;        /* page ground */
+  --paper-2:#E3DFD6;      /* raised paper */
+  --ink:#101114;          /* panels, text */
+  --ink-2:#1B1D22;        /* raised ink */
+  --mute:#6D6B66;         /* secondary text on paper */
+  --mute-ink:#9A9CA3;     /* secondary text on ink */
+  --signal:#3B5BFF;       /* ultramarine accent */
+  --signal-hot:#8FA2FF;   /* accent on ink */
+  --line:rgba(16,17,20,.14);
+  --line-ink:rgba(255,255,255,.12);
+  --display:"Archivo",ui-sans-serif,system-ui,sans-serif;
+  --body:"Archivo",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --r:18px;
+  --gut:clamp(10px,1.4vw,18px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;margin:0;padding-inline:var(--gut);padding-block:var(--gut) 0;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:6px}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.wrap{max-width:1360px;margin-inline:auto}
+
+/* ---------- HERO PANEL ---------- */
+.hero{position:relative;background:var(--ink);color:#F4F3EF;border-radius:var(--r);overflow:hidden;isolation:isolate;padding:clamp(88px,11vw,140px) clamp(16px,4vw,56px) 0}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto;height:120%;z-index:-1;
+  background:radial-gradient(60% 55% at 50% 100%,rgba(59,91,255,.55),transparent 70%),radial-gradient(40% 40% at 85% 20%,rgba(143,162,255,.14),transparent 70%)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.35;
+  background-image:linear-gradient(var(--line-ink) 1px,transparent 1px),linear-gradient(90deg,var(--line-ink) 1px,transparent 1px);background-size:64px 64px;
+  mask-image:radial-gradient(70% 60% at 50% 45%,#000,transparent 80%)}
+
+.nav{position:absolute;top:14px;left:14px;right:14px;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:rgba(27,29,34,.72);backdrop-filter:blur(14px);border:1px solid var(--line-ink);border-radius:14px;padding:10px 10px 10px 18px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-stretch:112%;font-size:19px;letter-spacing:-.02em}
+.logo i{width:26px;height:26px;border-radius:7px;background:var(--signal);display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:900;color:#fff;font-stretch:100%}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.nav ul a{display:block;padding:8px 12px;border-radius:9px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute-ink);transition:color .2s,background .2s}
+.nav ul a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border-radius:11px;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;transition:transform .2s,background .2s;white-space:nowrap}
+.btn svg{width:14px;height:14px;transition:transform .2s}
+.btn:hover svg{transform:translateX(3px)}
+.btn-light{background:#F4F3EF;color:var(--ink)}
+.btn-dark{background:var(--ink-2);color:#F4F3EF;border:1px solid var(--line-ink)}
+.btn-signal{background:var(--signal);color:#fff}
+.nav .btn{padding:10px 14px}
+@media (max-width:860px){.nav ul{display:none}}
+
+.hero-copy{text-align:center;max-width:1100px;margin-inline:auto;display:grid;justify-items:center;gap:22px}
+.bracket{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute-ink)}
+.bracket b{color:var(--signal-hot);font-weight:500}
+h1{font-family:var(--display);font-weight:800;font-stretch:118%;text-transform:uppercase;letter-spacing:-.035em;line-height:.9;margin:0;font-size:clamp(46px,9.4vw,148px);text-wrap:balance}
+h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px #F4F3EF}
+.hero-sub{max-width:52ch;color:#C9CAD0;font-size:clamp(16px,1.35vw,19px);margin:0}
+.hero-ctas{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+.reel{margin:clamp(48px,7vw,88px) calc(-1 * clamp(16px,4vw,56px)) 0;display:grid;gap:12px;transform:rotate(-3deg) scale(1.06);transform-origin:center;padding-bottom:48px}
+.strip{display:flex;gap:12px;width:max-content;animation:slide 70s linear infinite}
+.strip.rev{animation-direction:reverse;animation-duration:85s}
+.strip img{width:clamp(180px,20vw,280px);aspect-ratio:202/158;object-fit:cover;border-radius:10px;background:var(--ink-2)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+.hero-foot{position:relative;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 0 20px;border-top:1px solid var(--line-ink);margin-top:-20px;background:var(--ink)}
+.hero-foot span{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-ink)}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#46D38A;margin-right:8px;box-shadow:0 0 0 4px rgba(70,211,138,.15)}
+
+/* ---------- CLIENTS ---------- */
+.clients{padding-block:clamp(40px,6vw,72px);overflow:hidden}
+.clients .label{text-align:center;margin-bottom:22px}
+.names{display:flex;width:max-content;animation:slide 50s linear infinite}
+.names span{font-family:var(--display);font-weight:700;font-stretch:108%;font-size:clamp(26px,3.2vw,44px);letter-spacing:-.02em;padding-inline:clamp(18px,2.4vw,36px);white-space:nowrap;color:var(--ink)}
+.names span:nth-child(3n+2){color:var(--mute);font-weight:400;font-style:italic;font-stretch:90%}
+
+/* ---------- SECTION HEADS ---------- */
+.sec{padding-block:clamp(40px,6vw,88px)}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:clamp(20px,3vw,36px);padding-inline:4px}
+h2{font-family:var(--display);font-weight:700;font-stretch:108%;letter-spacing:-.03em;line-height:.95;margin:6px 0 0;font-size:clamp(36px,5.2vw,76px);text-wrap:balance}
+.link-arrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px}
+
+/* ---------- FEATURED CARDS ---------- */
+.cards{display:grid;gap:var(--gut)}
+.card{position:relative;display:block;border-radius:var(--r);overflow:hidden;background:var(--ink);color:#F4F3EF;aspect-ratio:16/7;min-height:380px;max-width:100%}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.2,1),filter .6s;filter:saturate(.95)}
+.card:hover img{transform:scale(1.045)}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,17,20,0) 35%,rgba(16,17,20,.88) 100%)}
+.card-body{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;padding:clamp(18px,2.4vw,30px)}
+.card-meta{display:grid;gap:12px;min-width:0}
+.card h3{font-family:var(--display);font-weight:700;font-stretch:108%;letter-spacing:-.02em;font-size:clamp(24px,2.6vw,38px);line-height:1;margin:0}
+.card p{margin:0;max-width:52ch;color:#D2D3D8;font-size:15px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:7px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);color:#EDEDF0}
+.result{text-align:right;flex-shrink:0}
+.result b{display:block;font-family:var(--display);font-weight:800;font-stretch:118%;font-size:clamp(40px,5vw,72px);line-height:.85;letter-spacing:-.04em;color:#fff}
+.result span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal-hot)}
+.card-num{position:absolute;top:18px;right:20px;z-index:2;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.7)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--gut)}
+.pair .card{aspect-ratio:4/3.4}
+@media (max-width:760px){.card,.pair .card{aspect-ratio:auto;min-height:440px}.pair{grid-template-columns:1fr}.result{text-align:left}}
+
+/* ---------- SERVICES ---------- */
+.services{background:var(--ink);color:#F4F3EF;border-radius:var(--r);padding:clamp(28px,5vw,72px) clamp(18px,4vw,56px)}
+.services .label{color:var(--mute-ink)}
+.services h2{max-width:14ch}
+.svc-intro{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:end;margin-bottom:clamp(28px,4vw,56px)}
+.svc-intro p{color:#B9BAC1;max-width:46ch;margin:0;font-size:17px}
+.svc{border-top:1px solid var(--line-ink)}
+.svc details{border-bottom:1px solid var(--line-ink)}
+.svc summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:clamp(14px,3vw,40px);align-items:center;padding-block:clamp(18px,2.4vw,28px)}
+.svc summary::-webkit-details-marker{display:none}
+.svc .idx{font-family:var(--mono);font-size:12px;color:var(--mute-ink)}
+.svc h3{font-family:var(--display);font-weight:600;font-stretch:112%;letter-spacing:-.025em;font-size:clamp(26px,3.6vw,54px);margin:0;line-height:1;transition:color .25s}
+.svc summary:hover h3{color:var(--signal-hot)}
+.plus{width:40px;height:40px;border-radius:50%;border:1px solid var(--line-ink);display:grid;place-items:center;transition:transform .3s,background .3s}
+.plus::before{content:"+";font-family:var(--mono);font-size:18px}
+details[open] .plus{transform:rotate(45deg);background:var(--signal);border-color:var(--signal)}
+.svc-body{display:grid;grid-template-columns:1fr 1fr;gap:28px;padding:0 0 30px clamp(40px,6vw,76px)}
+.svc-body p{margin:0;color:#C9CAD0;max-width:48ch}
+.caps{display:flex;flex-wrap:wrap;gap:6px;align-content:start}
+.caps span{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;padding:7px 11px;border:1px solid var(--line-ink);border-radius:8px;color:#DADBE0}
+@media (max-width:760px){.svc-intro,.svc-body{grid-template-columns:1fr}.svc-body{padding-left:0}}
+
+/* ---------- STATS + ABOUT ---------- */
+.about{display:grid;grid-template-columns:1fr 1.25fr;gap:var(--gut)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:var(--gut)}
+.stat{background:var(--paper-2);border-radius:var(--r);padding:clamp(18px,2.2vw,28px);display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:190px}
+.stat b{font-family:var(--display);font-weight:800;font-stretch:118%;letter-spacing:-.045em;line-height:.85;font-size:clamp(52px,6vw,92px)}
+.stat b sup{font-size:.4em;vertical-align:top;margin-left:2px;color:var(--signal)}
+.stat span{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.stat.accent{background:var(--signal);color:#fff}
+.stat.accent span{color:rgba(255,255,255,.8)}
+.stat.accent b sup{color:#fff}
+.bio{background:var(--paper-2);border-radius:var(--r);padding:clamp(22px,3vw,40px);display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,2.4vw,32px);align-content:start}
+.bio img{width:clamp(110px,12vw,160px);aspect-ratio:1;object-fit:cover;border-radius:14px;background:var(--paper)}
+.bio h3{font-family:var(--display);font-weight:700;font-stretch:108%;letter-spacing:-.02em;font-size:clamp(24px,2.4vw,32px);margin:4px 0 12px;line-height:1.05}
+.bio p{margin:0 0 14px;max-width:58ch;color:#34353A}
+.bio blockquote{grid-column:1/-1;margin:8px 0 0;padding-top:22px;border-top:1px solid var(--line);font-family:var(--display);font-weight:500;font-stretch:100%;font-size:clamp(20px,2vw,26px);letter-spacing:-.015em;line-height:1.2}
+.bio blockquote em{font-style:normal;color:var(--signal)}
+.history{grid-column:1/-1;display:grid;gap:0;margin-top:6px}
+.history div{display:grid;grid-template-columns:1fr auto;gap:16px;padding-block:11px;border-top:1px solid var(--line);font-size:15px}
+.history div span:last-child{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);text-align:right}
+@media (max-width:960px){.about{grid-template-columns:1fr}}
+@media (max-width:520px){.bio{grid-template-columns:1fr}}
+
+/* ---------- ARCHIVE INDEX ---------- */
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filters button{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;transition:background .2s,color .2s}
+.filters button[aria-pressed="true"]{background:var(--ink);color:#F4F3EF;border-color:var(--ink)}
+.filters button small{opacity:.55;margin-left:6px}
+.index{border-top:1px solid var(--ink)}
+.row{display:grid;grid-template-columns:84px 1fr auto 28px;gap:clamp(12px,2vw,28px);align-items:center;padding-block:12px;border-bottom:1px solid var(--line);transition:background .2s,padding .25s}
+.row img{width:84px;aspect-ratio:202/158;object-fit:cover;border-radius:7px;background:var(--paper-2)}
+.row h4{margin:0;font-family:var(--display);font-weight:600;font-stretch:104%;letter-spacing:-.015em;font-size:clamp(17px,1.7vw,23px);line-height:1.15;min-width:0}
+.row .cat{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.row .go{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;transition:background .2s,color .2s}
+.row .go svg{width:12px;height:12px}
+.row:hover{background:var(--paper-2);padding-inline:12px}
+.row:hover .go{background:var(--signal);color:#fff}
+.more{display:flex;justify-content:center;padding-top:24px}
+.more button{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:13px 20px;border-radius:11px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.more button:hover{background:var(--ink);color:#F4F3EF}
+@media (max-width:560px){.row{grid-template-columns:64px 1fr 24px}.row img{width:64px}.row .cat{display:none}}
+
+/* ---------- CTA + FOOTER ---------- */
+.cta{position:relative;background:var(--ink);color:#F4F3EF;border-radius:var(--r) var(--r) 0 0;overflow:hidden;isolation:isolate;padding:clamp(56px,9vw,128px) clamp(18px,4vw,56px) clamp(28px,4vw,48px);margin-top:clamp(40px,6vw,88px)}
+.cta::before{content:"";position:absolute;inset:auto -10% -40%;height:110%;z-index:-1;background:radial-gradient(55% 60% at 50% 100%,rgba(59,91,255,.6),transparent 70%)}
+.cta-big{text-align:center;display:grid;justify-items:center;gap:26px}
+.cta-big h2{font-weight:800;font-stretch:120%;text-transform:uppercase;letter-spacing:-.04em;font-size:clamp(52px,11vw,176px);line-height:.86;margin:0}
+.cta-big h2 span{display:block;color:transparent;-webkit-text-stroke:1.5px #F4F3EF}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;margin-top:clamp(56px,8vw,110px);padding-top:28px;border-top:1px solid var(--line-ink)}
+.foot h5{margin:0 0 12px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute-ink);font-weight:400}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot a{color:#E4E5E9;transition:color .2s}
+.foot a:hover{color:var(--signal-hot)}
+.foot p{margin:0;color:#B9BAC1;max-width:32ch}
+.copy{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-ink)}
+@media (max-width:760px){.foot{grid-template-columns:1fr 1fr}.foot > div:first-child{grid-column:1/-1}}
+
+@media (prefers-reduced-motion:reduce){.strip,.names{animation:none}.card img{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <nav class="nav" aria-label="Primary">
+    <a href="#top" class="logo"><i>FI</i>Imler</a>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#archive">Archive</a></li>
+      <li><a href="https://frankimler.myportfolio.com/the-resume" target="_blank" rel="noopener">Resume</a></li>
+    </ul>
+    <a class="btn btn-light" href="#contact">Let's talk <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  </nav>
+
+  <div class="hero-copy">
+    <div class="bracket">( Frank Imler <b>/</b> Creative Director )</div>
+    <h1>Big ideas.<br><em>Real</em> results.</h1>
+    <p class="hero-sub">15 years turning ambitious ideas into work that gets noticed and gets results. Creative Director by title. UX designer by obsession.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-light" href="#work">View the work <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></a>
+      <a class="btn btn-dark" href="#contact">Start a project <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    </div>
+  </div>
+
+  <div class="reel" aria-hidden="true">
+    <div class="strip" id="stripA"></div>
+    <div class="strip rev" id="stripB"></div>
+  </div>
+
+  <div class="hero-foot">
+    <span><i class="dot"></i>Open to new roles + projects</span>
+    <span>Salt Lake City, Utah</span>
+    <span>ADDY Winner / AIGA 100 Show</span>
+  </div>
+</header>
+
+<!-- CLIENTS -->
+<section class="clients" aria-label="Clients">
+  <div class="label">( Brands I've moved )</div>
+  <div class="names" id="names"></div>
+</section>
+
+<!-- FEATURED -->
+<section class="sec" id="work" style="padding-top:0">
+  <div class="sec-head">
+    <div><div class="label">( Selected work )</div><h2>Featured work</h2></div>
+    <a class="link-arrow" href="#archive">Full archive ↓</a>
+  </div>
+
+  <div class="cards">
+    <a class="card" href="https://frankimler.myportfolio.com/brawley-lp" target="_blank" rel="noopener">
+      <img src="https://cdn.myportfolio.com/65f6d075-e6f2-4852-9a29-1ee21f913631/ee2ee1a8-1583-4fbf-bd57-a104ac03a319_rw_3840.png?h=fe2b06611091da2abce0e23ac92677e2" alt="Vanderhall Brawley GTS launch landing page">
+      <span class="card-num">01 / Automotive</span>
+      <div class="card-body">
+        <div class="card-meta">
+          <h3>Vanderhall Brawley GTS</h3>
+          <p>An all-electric off-roader got a launch page that hits as hard as the truck. Lead with the vehicle, then earn the scroll.</p>
+          <div class="tags"><span class="tag">Creative Direction</span><span class="tag">UX</span><span class="tag">Launch Page</span></div>
+        </div>
+        <div class="result"><b>+300%</b><span>Reservations</span></div>
+      </div>
+    </a>
+
+    <div class="pair">
+      <a class="card" href="https://frankimler.myportfolio.com/forceusa-website" target="_blank" rel="noopener">
+        <img loading="lazy" src="https://cdn.myportfolio.com/65f6d075-e6f2-4852-9a29-1ee21f913631/74b49c06-86b9-4c7d-ae60-f8f215ef1e56_rw_3840.jpg?h=d9a8484be48aba2dc30fe5a6ae9ffe6d" alt="ForceUSA website">
+        <span class="card-num">02 / Fitness DTC</span>
+        <div class="card-body"><div class="card-meta">
+          <h3>ForceUSA</h3>
+          <p>They invented the all-in-one home gym. Now the site acts like it. Competitors started copying it after launch.</p>
+          <div class="tags"><span class="tag">Brand Strategy</span><span class="tag">UX / UI</span><span class="tag">Video</span></div>
+        </div></div>
+      </a>
+      <a class="card" href="https://frankimler.myportfolio.com/tafi-astra-sdk-avatar-builder" target="_blank" rel="noopener">
+        <img loading="lazy" src="https://cdn.myportfolio.com/65f6d075-e6f2-4852-9a29-1ee21f913631/5c852998-623c-480f-b091-44adb7156472_rw_1920.png?h=8ed486d4b87af033de43b112541d01f6" alt="Tafi Avatar Builder for Samsung">
+        <span class="card-num">03 / Mobile Product</span>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3>Tafi Avatar Builder</h3>
+            <p>A pro-grade 3D avatar engine, rebuilt for a thumb. Shipped on Samsung.</p>
+            <div class="tags"><span class="tag">UX</span><span class="tag">UI</span><span class="tag">App</span></div>
+          </div>
+          <div class="result"><b>50K+</b><span>Year-one downloads</span></div>
+        </div>
+      </a>
+    </div>
+
+    <a class="card" href="https://frankimler.myportfolio.com/taylormed-social-campaign" target="_blank" rel="noopener">
+      <img loading="lazy" src="https://cdn.myportfolio.com/65f6d075-e6f2-4852-9a29-1ee21f913631/819c0127-2d84-4428-8cc4-4a781ab9bc91_rw_3840.jpg?h=6d73da6df7bf751f792dd6ba2074abef" alt="TaylorMed MRI campaign">
+      <span class="card-num">04 / Healthcare</span>
+      <div class="card-body"><div class="card-meta">
+        <h3>TaylorMed MRI</h3>
+        <p>No referral. No insurance approval. $399 a scan. A 360 campaign built to cut through the red tape.</p>
+        <div class="tags"><span class="tag">Creative Direction</span><span class="tag">360 Campaign</span><span class="tag">Social</span><span class="tag">OOH</span></div>
+      </div></div>
+    </a>
+
+    <div class="pair">
+      <a class="card" href="https://frankimler.myportfolio.com/everlights-website" target="_blank" rel="noopener">
+        <img loading="lazy" src="https://cdn.myportfolio.com/65f6d075-e6f2-4852-9a29-1ee21f913631/8396da5d-d5bb-452a-8c35-7437f51b9509_rw_3840.jpg?h=2bf665d68efa5cf2f9b64d16291b7c24" alt="Everlights website">
+        <span class="card-num">05 / Home Services</span>
+        <div class="card-body"><div class="card-meta">
+          <h3>Everlights</h3>
+          <p>Permanent lighting, permanent dark mode. A premium product finally got a premium site.</p>
+          <div class="tags"><span class="tag">Brand</span><span class="tag">UX / UI</span><span class="tag">Art Direction</span></div>
+        </div></div>
+      </a>
+      <a class="card" href="https://frankimler.myportfolio.com/the-current-comic-book-series" target="_blank" rel="noopener">
+        <img loading="lazy" src="https://cdn.myportfolio.com/65f6d075-e6f2-4852-9a29-1ee21f913631/51b61b88-f67f-4c26-a847-0f9741fdc1de_rw_3840.jpg?h=44bd0fc8c71895b6d9ca1bc9c299c052" alt="The Current comic book series for TAB Bank">
+        <span class="card-num">06 / Financial ABM</span>
+        <div class="card-body"><div class="card-meta">
+          <h3>The Current</h3>
+          <p>An ABM campaign for TAB Bank. As an actual comic book. Temp CFOs read every issue.</p>
+          <div class="tags"><span class="tag">Creative Strategy</span><span class="tag">Art Direction</span><span class="tag">ABM</span></div>
+        </div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="svc-intro">
+    <div><div class="label">( What I do )</div><h2>Strategy you can see.</h2></div>
+    <p>I sit where brand, campaign and product meet. Big-picture strategy up front, hands-on design all the way through, and a team that ships.</p>
+  </div>
+  <div class="svc">
+    <details open>
+      <summary><span class="idx">A</span><h3>Creative Direction</h3><span class="plus" aria-hidden="true"></span></summary>
+      <div class="svc-body">
+        <p>360 campaigns, brand stories and new business pitches. I lead teams of strategists, writers and designers from first concept to final frame, and keep the idea intact across every channel.</p>
+        <div class="caps"><span>Campaign Concepting</span><span>Brand Story</span><span>Video + TV</span><span>Social</span><span>OOH</span><span>Pitch Leadership</span><span>Team Leadership</span></div>
+      </div>
+    </details>
+    <details>
+      <summary><span class="idx">B</span><h3>UX + Product Design</h3><span class="plus" aria-hidden="true"></span></summary>
+      <div class="svc-body">
+        <p>Websites, apps and launch pages that make a business easier to understand, use and trust. Research first, then IA and wireframes, then UI that converts.</p>
+        <div class="caps"><span>UX Research</span><span>Information Architecture</span><span>Wireframes</span><span>UI Design</span><span>Mobile Apps</span><span>Conversion</span></div>
+      </div>
+    </details>
+    <details>
+      <summary><span class="idx">C</span><h3>Brand + Identity</h3><span class="plus" aria-hidden="true"></span></summary>
+      <div class="svc-body">
+        <p>Logos, visual systems and brand guides built to scale, from a city rebrand to a national retailer's guidelines.</p>
+        <div class="caps"><span>Identity</span><span>Visual Systems</span><span>Brand Guides</span><span>Packaging</span><span>Motion + Kinetic Type</span></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="sec-head"><div><div class="label">( About )</div><h2>Hi, I'm Frank.</h2></div></div>
+  <div class="about">
+    <div class="stats">
+      <div class="stat"><span>Years in the chair</span><b>15<sup>+</sup></b></div>
+      <div class="stat accent"><span>Projects in the archive</span><b>100<sup>+</sup></b></div>
+      <div class="stat"><span>Largest team led</span><b>12</b></div>
+      <div class="stat"><span>Verticals</span><b>5</b></div>
+    </div>
+    <div class="bio">
+      <img loading="lazy" src="https://cdn.myportfolio.com/65f6d075-e6f2-4852-9a29-1ee21f913631/983d845c-6261-4133-80e8-29589363e7a6_rw_3840.png?h=a3eac7e05aa65904dcb04225cd562825" alt="Frank Imler">
+      <div>
+        <div class="label">Creative Director / UX / UI</div>
+        <h3>Strategy up top. Pixels all the way down.</h3>
+        <p>I lead teams, shape brand experiences, build award-winning campaigns and design digital products. Healthcare, automotive, DTC, outdoor and beauty. BFA in Graphic Design, and still the one opening Figma at midnight.</p>
+      </div>
+      <blockquote>Creative Director by title. <em>UX designer by obsession.</em></blockquote>
+      <div class="history">
+        <div><span>MaxConnect Digital</span><span>Creative Director</span></div>
+        <div><span>Fluid Advertising</span><span>Assoc. CD + Head of UX</span></div>
+        <div><span>DAZ 3D</span><span>UX / UI Designer</span></div>
+        <div><span>Scorpion</span><span>Designer</span></div>
+        <div><span>Richter7</span><span>Designer</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHIVE -->
+<section class="sec" id="archive" style="padding-top:0">
+  <div class="sec-head">
+    <div><div class="label">( Everything else )</div><h2>The archive</h2></div>
+    <div class="filters" role="group" aria-label="Filter projects" id="filters"></div>
+  </div>
+  <div class="index" id="index"></div>
+  <div class="more"><button id="moreBtn" type="button">Show more</button></div>
+</section>
+
+<!-- CTA -->
+<footer class="cta" id="contact">
+  <div class="cta-big">
+    <div class="bracket">( Got a big idea? )</div>
+    <h2>Let's make<span>it move.</span></h2>
+    <div class="hero-ctas">
+      <a class="btn btn-signal" href="https://frankimler.myportfolio.com/contact" target="_blank" rel="noopener">Get in touch <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></a>
+      <a class="btn btn-dark" href="https://www.linkedin.com/in/fimler/" target="_blank" rel="noopener">LinkedIn <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    </div>
+  </div>
+  <div class="foot">
+    <div><a href="#top" class="logo" style="margin-bottom:14px"><i>FI</i>Imler</a><p>Creative Director and UX designer based in Salt Lake City, Utah.</p></div>
+    <div><h5>Index</h5><ul><li><a href="#work">Work</a></li><li><a href="#services">Services</a></li><li><a href="#about">About</a></li><li><a href="#archive">Archive</a></li></ul></div>
+    <div><h5>Portfolio</h5><ul><li><a href="https://frankimler.myportfolio.com/work" target="_blank" rel="noopener">Creative Direction</a></li><li><a href="https://frankimler.myportfolio.com/ux" target="_blank" rel="noopener">UX</a></li><li><a href="https://frankimler.myportfolio.com/copy-of-creative-direction" target="_blank" rel="noopener">Design</a></li><li><a href="https://frankimler.myportfolio.com/the-resume" target="_blank" rel="noopener">Resume</a></li></ul></div>
+    <div><h5>Socials</h5><ul><li><a href="https://www.linkedin.com/in/fimler/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://www.behance.net/imler" target="_blank" rel="noopener">Behance</a></li></ul></div>
+  </div>
+  <div class="copy"><span>© 2026 Frank Imler</span><span>Built with intent in Utah</span></div>
+</footer>
+</div>
+
+<script>
+const B='https://cdn.myportfolio.com/65f6d075-e6f2-4852-9a29-1ee21f913631/';
+const S='https://frankimler.myportfolio.com/';
+const C='_carw_202x158x5120.';
+// [slug, title, uuid, ext, hash]
+const CD=[
+["ziwi-mattress-campaign","Ziwi Mattress Campaign","7c46453c-cf9e-4b06-9bfe-9cf22c67b23c","jpg","58bda9da4e921dc74d729e7e09792450"],
+["taylormed-social-campaign","TaylorMed Social Campaign","c7d4f11a-fb6b-44cb-ae3f-8fa3402159ea","jpg","dff6e0eebf33fcf16665a8e078d332bc"],
+["kindle-karges-social-campaign","Kindel Karges Social Campaign","c231898c-4580-4652-8a7e-599ed05cc8fe","jpg","2a232b3ed040eb7fecafcef51a698747"],
+["western-awakenings-social-campaign","Western Awakenings Social Campaign","bfd1876b-2d7e-4870-a26f-670514ef511f","jpg","831bb7ecf35f7bc40789d3246c0ab027"],
+["mindbru","mindbrü Social Campaign","4cdbfac2-a9d5-4d0d-8ce5-d5455098ace6","jpg","05fd33e5916164edd27f24fc3fb29141"],
+["relyte-campaign","ReLyte Campaign","afd8e4e7-f1e8-43cf-b9dc-256a23dbec97","jpg","2d4f3f7be7f8989998097b9094a488b0"],
+["java-house-peel-n-pour","Java House Peel-N-Pour","d9965c88-48fd-4ebb-880c-fad925f49cd1","png","38f7a1243182d274d24a52d6c5568708"],
+["riverton-chevy-river-video","Riverton Chevy River Video","2d67a462-5dd3-4a98-9ff0-41f4bbbbf001","png","faf8796dfe4954ec4afdc0ed12235771"],
+["idaho-asphalt-legacy-video","Idaho Asphalt Legacy Video","e807d33f-f485-4d1c-b3bf-31a23db00947","png","d1b0ecfb9ca51f5a4654075240e15fe0"],
+["acrd-lawsuit-video","ACRD Lawsuit Video","faa4fa93-c3ae-4f06-bb46-aa63abca2ba6","png","36a6eab17d990b292b6ae238a2529619"],
+["a-core-50th","A-Core 50th","5e0dcfad-7198-4ee5-9374-6cb562a87355","png","f39d7c1a410ab95423e1bf9894fd8434"],
+["cedar-city-billboards","Cedar City Billboards","48f754d2-166c-4b7b-a7f2-f550ad44d0a1","jpg","a969e203e50c1bcbcfa6f4cf09fb78d1"],
+["defy-couch-spots","Defy Couch Spots","bfa25b36-cad1-41fa-9e2d-cfbb423ea152","png","afc0e46fecb01fa50c62730ae9694c25"],
+["ed-kenley-rhinocebear","Ed Kenley Rhinocebear","3eb4178f-dfd8-47c0-bab8-cce34d3d3464","png","fe534822a1586c7a4279594c810a22d6"],
+["utah-works","Utah Works","f4d0613e-6854-4d53-84ac-959821cc3bcd","jpg","6ad5b41bbe2e377074df68a65a412bab"],
+["sportsmans-warehouse-hunting-video","Sportsman's Warehouse Hunting Video","1c72da03-4ff1-41a2-b7de-a4a9fa110ffa","png","004ff7a6dfc8f2f94b47cd61af3cd3dd"],
+["pret-helmets-campaign-concepts","Pret Helmets Campaign Concepts","ff5cde4e-c417-4a52-afcc-477a6d11771c","jpg","d860a0c54fbbf492b97fe9260b0cbe52"],
+["creminelli-campaign-concepts","Creminelli Campaign Concepts","4bc42821-3a61-4a63-8952-1420e8f5ca82","jpg","71bb63009dda12ef605eda79cffdf6d8"],
+["snowbasin-proposal","Snowbasin Proposal","0429bac0-0438-4b70-a462-c78d4236aec9","jpg","fde56512bc656539b24de8a4cbcc6d89"],
+["outdoor-innovation-show-ad-concepts","Outdoor Innovation Show Ad Concepts","8f29d560-f8cb-40ec-ac53-a9a39d8a4a24","jpg","bf8eda2e8db62a59762ff1af891f61a8"],
+["ed-kenley-ford-2017-billboards","Ed Kenley Ford 2017 Billboards","731e0684-a58f-4e5a-a384-00c1c01e0403","png","1f79c1791a068450cac2678ed45b8642"],
+["ed-kenley-ford-advertising-1","Ed Kenley Ford Advertising","bc96eb19-7ac4-457d-9fea-e741432db0dc","png","195889d727b61011674ec9eef1a25057"],
+["ed-kenley-ford-2017-tv-campaign","Ed Kenley Ford 2017 TV Campaign","efde01bc-720d-45ac-989e-6e548330cd06","png","dcc70d9688f5460b335cc19ad8182747"],
+["ed-kenley-ford-2016-tv-spots","Ed Kenley Ford 2016 TV Spots","f29a2219-3e5c-4e61-b50c-cc7e2aa9a7d6","png","2eca37477aeb9cdbd3aaa420585aae39"],
+["klymit-2015-ad-campaign","Klymit 2015 Ad Campaign","9d12dd2b-e879-477b-a1a7-b9af6935100c","jpg","37a076463f56860ac042b50c5943850f"],
+["advancedcfo-ad","AdvancedCFO Ad","e99c70ee-80c8-4af4-918c-cb79f749692c","jpg","87a45a6fa09e17aa5515c33ad489f3eb"],
+["ed-kenley-ford-2015-billboards","Ed Kenley Ford 2015 Billboards","54412a36-0cb2-4a76-a9d7-ed70a3967431","jpg","7b3c9a689f143fd859c6bb5df24ebf58"],
+["ed-kenley-ford-bus-ads","Ed Kenley Ford Bus Ads","4643d56d-b4fb-4f22-8e43-01d6f3e744c4","jpg","aec58f9c03e2a8c018c544be48e92f54"],
+["ed-kenley-ford-2015-tv","Ed Kenley Ford 2015 TV","9b0b4836-329c-4363-b9f5-bdb9392530e6","png","86ec12fa69594c07cbc0c7ba260bccbf"],
+["ed-kenley-ford-non-combative-dealer","Ed Kenley Ford: Non-combative Dealer","8a5d8045-6ee6-4488-bfcc-fa5f6f8a8727","png","8db9c679c1bd29dd639235b46807bbac"],
+["ed-kenley-ford-billboards","Ed Kenley Ford Billboards","0b2d4900-bfa5-46f1-b0c3-8e70853bc46a","jpg","d3a481560cb7d71c90e3566ed568c852"],
+["ed-kenley-ford-advertising","Ed Kenley Ford Print","065ca5da-9dc4-4b80-9495-6f53260dc946","jpg","89ef491364fb863ad337c4b3b7cc4df5"],
+["ed-kenley-ford-cat-dog-tv-spots","Ed Kenley Ford Cat & Dog TV Spots","e40e7902-5e04-4fcb-ad83-a57b62f490b9","png","36500f06933957868a0c4cc7fdcd75c0"],
+["utah-dwr-ice-fishing-promo","Utah DWR Ice Fishing Promo","7346cf06-8f35-45a6-9eb8-a14559ac819d","png","9e951eee30cf604bf4fc03941975d0b9"]];
+const UX=[
+["brawley-lp","Vanderhall Brawley GTS Launch Page","d23f68f3-906f-481a-a055-43f3debd9976","png","958e98754a0ebeafc620262663aecaba"],
+["forceusa-website","ForceUSA Website","e2e7b06f-bb46-421b-9f29-9cff6436f39d","jpg","cc15d2751915dc16df7234f7a42754c9"],
+["everlights-website","Everlights Website","681bae63-31c6-4343-8611-cffbc6abb4e1","jpg","f5002ee92e9760514c9af2b0f097956e"],
+["access-medical-website","Access Medical Website","971ab7fc-999b-4a38-a0c7-12f7cf2f3130","jpg","d92f1e8fe1558d0e75db242eab92491e"],
+["mid-america-catastrophe-services-website","Mid-America Catastrophe Services","545c5f8f-e1e8-4304-9ef1-06e7b7ee68da","jpg","6628f4a47c07eb89cf14aeda47bde798"],
+["rk-hunting-website","R&K Hunting Website","19643032-e145-41b6-a602-fcbff32f7004","jpg","46be7111e4003cb0b5211f60e31f4176"],
+["rooftek-website","RoofTek Website","66a0967a-08df-43b6-9040-a5e9ff2c9588","jpg","4c2bfcd15429e10aec908e2471843b88"],
+["ready-room","Ready Room","e05cbe41-fb24-492c-96e8-cf7081e103f4","png","3bee606f45cb15b284a83f6916b238ae"],
+["scorpu-scorpion-university","ScorpU: Scorpion University","9b161141-fc90-42af-a059-0eff13887168","png","364ec170e5b961cd4d54ee86facb74ed"],
+["daz-studio","Daz Studio","b2a4f53f-b956-4099-9b99-676a7ebec8d3","png","4a47c8ea5105cc5eea75fe3890682fc8"],
+["tafi-astra-sdk-avatar-builder","Tafi ASTRA SDK Avatar Builder","67643f99-0ebb-4978-95fc-5031ff896bc3","png","887a3af203bd896416b05831f9b38700"],
+["daz-nft-marketplace","Daz NFT Marketplace","c6bfbff3-7217-415d-b5b4-e30ff94d73c1","png","c7e62205aa60366852d93f91df3a0493"],
+["install-manager","Install Manager","e5c408c9-5c07-4eb3-ad44-ce62c45b67d5","png","01dc916557341be76904d7d3fa3182cd"],
+["vicinity-app","Vicinity App","91b90f14-0dab-48ba-b1de-9eaa1e1b5439","jpeg","d5cd0ac9f5ad5bca2e829ddefe452f92"],
+["utah-works-website","Utah Works Website","64ff9031-e965-40f6-ba42-e921e93a2db5","jpg","7fb140f3acba6cef8ed4380d20ed724e"],
+["cox-for-governor","Cox for Governor","4bafc22d-d0c8-415f-a18c-582cb2c12683","jpg","42d0e7ed9deea739544aea52eabf9267"],
+["professional-artist-submission-system","Professional Artist Submission System","e4e6ab49-f020-4269-abe1-f601c370629d","png","0a996de747a75f0da0aa5aae3590e128"],
+["pret-helmets-website","Pret Helmets Website","498a3f9c-fd63-41ee-94ae-e8358888c62b","jpg","e5c4f408b0b733f77ae7005d13c3c099"],
+["nft-collection-management-system","NFT Collection Management System","3fab5458-f8ed-4927-b10a-b3d9591e387b","png","76ef940e2078a165f7fbed02f1238bc3"],
+["fluid-untamed-website-design","Fluid Untamed Website","c46a7c0e-76f5-4ee7-8cb6-c2d945623acc","jpg","c31ee1de698e4c4764aaca781e4dd561"],
+["the-nickles-group-website","The Nickles Group Website","1e1d73c6-c651-4906-a5ca-0484623558f6","jpg","0895ad9f3998bf6cf8745763ebf93f24"],
+["advanced-cfo-website","Advanced CFO Website","6d53386a-7d2d-40f2-85d2-f6673713577a","png","6c5a3ed4862b120dc7e5628c1616738e"],
+["morgan-asphalt-website","Morgan Asphalt Website","4c5bdc76-1081-4570-b623-e4959fae7e92","jpg","4d98e65a29ceb6a22c345bf84337362e"],
+["sabin-holdings-website","Sabin Holdings Website","289bae96-52ef-440f-b6a2-6ab3049f76cb","png","9254751ace22b0d6123cce620b564212"],
+["voices-of-vascular-website","Voices of Vascular Website","6de84209-dbe8-4356-96ea-32fbd6a51e10","jpg","1e31a32a7bee7bb869b0cd610289e1bf"],
+["kane-county-website","Kane County Website","ba0aac9f-7a8d-472c-a94e-ddc183365acb","jpg","0653dae3e6f5c8110843802d07664924"],
+["sabin-childrens-foundation-website","Sabin Children's Foundation Website","832af241-f18c-47ff-a4cf-54046efdaa32","png","4c1fec0fb695d214057b728e946fedbd"],
+["cedar-city-ut-website","Cedar City, UT Website","48ff39cb-be91-4d93-9467-55c1067bf0db","jpg","4c0507e0e2076ffef7b1f54873e8b244"],
+["excel-centre-website","Excel Centre Website","c68a2a49-ef11-45aa-977d-28b784c3b31f","png","e0f8dfcae49b82b2c0377c5ff43ba894"],
+["pro-image-sports-website","Pro Image Sports Website","fa4dd166-63ac-4d5d-8666-6fc6b3deec3c","png","b5282f874a58138a09ab21944f8e6c22"],
+["ui-initial-pitch","UI Initial Pitch","5c02d5b9-2caa-4482-a8e0-e8454d12c6fa","jpg","e2d8b4788df2216d7d8101ceae24037c"],
+["shipley-associates-website","Shipley Associates Website","83c261c0-cef5-4f8c-8d31-642703f470c3","jpg","bbe1da5297f2a3e74b8d26b164821eca"],
+["verti-block-website","Verti-Block Website","290114b2-e31a-4e37-818b-95cd5bd974cd","png","825639db6f7dbd3277d5d484d1507a59"],
+["cole-west-home-website","Cole West Home Website","1ea794be-3dee-4610-b187-11d5b76fd2d7","png","f0e5cd268349da05ba27bb43c7e4f80a"],
+["mti-website","MTI Website","87ce38b4-bc84-4c9f-99b6-4e68f9b07f41","png","4985176f56f9613ced19b14c026be3dd"],
+["pure-hearing-website-design","Pure Hearing Website","96f82db1-2740-414f-93c6-f76d1cbfd02f","png","81a17b6739f9d48591b79661d06a8d3d"],
+["steton-website","Steton Website","33c32f9b-ac81-4833-a5a4-a0fe462e572b","png","c244a521af891fe95d2f0f97390ecb11"],
+["delta-stone-website","Delta Stone Website","81d8e368-c647-4480-9d5b-4cb8f40f7719","png","169d8a00cb11cfaf684e1e5cf30db3c1"],
+["integrated-wealth-strategies","Integrated Wealth Strategies","89f4feb6-221b-4ce7-81db-51c479d62a98","jpg","8f7fb4c63d1722862e2794a86e4e8af4"],
+["getfluid-website","GetFluid Website","98d51fea-9c2a-4ec0-9c56-800e6bd9539e","jpg","18cd248b520fb64d08b722233a603600"],
+["landesk-website-redesign","LANDesk Website Redesign","330e6df2-92f7-4267-90dd-8d76c69b27a0","png","8605487334538b7dd9eaa7ae1a797815"],
+["lashbrook-website","Lashbrook Website","64aea522-9806-4d35-a943-e5ea76474036","png","7dbf7893658842bb2a3ac25d4347c06f"],
+["utah-governors-office-of-economic-development-website","Utah GOED Website","90b9a223-4ff1-419b-b39f-052a7b01e6dc","jpg","d665a38f3fec646687787089ae0fdbe3"],
+["petrous-leadership-website","Petrous Leadership Website","dc3069b1-e464-45b3-8ea3-f43e5109d3f6","jpg","61f15e0b267a9a4b74a0295a40575859"],
+["pikus-concrete-website","Pikus Concrete Website","b988e880-470f-4173-8ac6-250313bd5b74","jpg","846fcacfbace5bdfa17917ef7a5f0b31"]];
+const DS=[
+["cedar-city-ut-rebrand","Cedar City, UT Rebrand","9111e093-24dd-49d5-8a98-86c22dab118f","png","c76c52cadc8e18ef46aa555a7e3565c8"],
+["sportsmans-warehouse-brand-guide","Sportsman's Warehouse Brand Guide","b6262cab-0d9b-41a9-90ad-61533541c852","jpg","c269ff82cc6652b5e27fd445c676581a"],
+["excel-centre-logo","Excel Centre Logo","b8a8d969-5436-467b-9d5e-75b812809f26","jpg","0cb7ee2aea8daeee365d57a243a5632f"],
+["stickers","Stickers","53203452-afea-48b6-a103-3c28ea1d6969","jpg","e6069857f0481e9f3cf6b5bacd94dd16"],
+["the-current-comic-book-series","The Current Comic Book Series","b6886887-efe5-45f0-a110-4cecc9d57dd6","jpg","ac94eb0512d8fb5a2e66814c1a2f1ca6"],
+["ben-dan-are-having-a-baby-poster-series","Ben & Dan Are Having a Baby Posters","05f4c28a-02f3-48cb-9351-1e545de1b650","jpg","0a5ca56586cb97e46f391ea908c27a1d"],
+["outdoor-innovation-show-logo","Outdoor Innovation Show Logo","4e216f59-ac2b-4b3b-8b8b-8670e28283c2","jpg","3b8fb38b65eabd9741b5eca1410b210a"],
+["advanced-cfo-animated-video","Advanced CFO Animated Video","8adfa81d-b214-4f9b-b997-ee78a91b97e4","png","89dea6eaab1fce9c8dadf9a5332be139"],
+["aaf-utah-kickball-tournament-trading-card-invite","AAF Utah Kickball Trading Card Invite","26ce8cb5-a05e-469d-aaeb-75da379d6c68","jpg","836088b62f25bd04d013203267c2f7b8"],
+["cr-england-one-logo","C.R. England One Logo","f3f5972d-e42f-49c8-b3c1-de86ffe69332","png","192e98f4efaf75434ea5145e3fa20d13"],
+["shave-wave-logo-concepts","Shave Wave Logo Concepts","3b37fde2-69bb-4cbd-939b-0ac46d65576d","png","ca412031fc9d865d7659e4fe0ee5003b"],
+["revgen-theme-and-creative","RevGen Theme and Creative","4614bd55-6d4f-4704-8a61-0a765d16d57b","jpg","c250a6d7826b07a78d02ae79050e2b35"],
+["ed-kenley-ford-mall-window-graphics","Ed Kenley Ford Mall Window Graphics","27cdfe1e-3738-407d-82c2-05d70a5a6111","jpg","ed07c913e9014a08d92e7423c9013dbe"],
+["mobius-virtual-foundry-branding","Mobius Virtual Foundry Branding","a4148cc8-914f-403b-8585-79c847f782bc","jpg","4f152e32f83384fe54c50dbf0e700b5c"],
+["tempus-promotional-kinetic-typography-video","Tempus Kinetic Typography Video","62a0b099-1c9c-4c19-a9f5-ae1ee804fcec","png","5694c556c730a0a3e06cb9a944b161a9"],
+["cap-utah-tv-spots","CAP Utah TV Spots","db0c4b52-d233-4878-b7f8-78e9af491486","png","8c73c88650ff721e00613b2f1ff9cf8b"],
+["ucat-kinetic-typography","UCAT Kinetic Typography","a800bec7-f424-447f-8d2c-462214c6ce85","png","5fbef0d4d116d35f5e0c9d9e0e50cc93"],
+["yak-hub-logos","Yak Hub Logos","03ede7af-c416-4314-b832-1f31b1267d49","jpg","d444989339ca9404abe0829cb304052f"],
+["pikus-concrete-logo-redesign","Pikus Concrete Logo Redesign","020e31fd-67dc-4950-87f9-757e22d61a4f","jpg","033cf487ce3744da42cffc9c822237cf"],
+["western-hydrovac-box","Western Hydrovac Box","aec03c33-c8ef-4eaa-b133-d79af54009d5","jpg","2741e798655aa62551cbf96a74d766a7"],
+["petrous-leadership-logo-redesign","Petrous Leadership Logo Redesign","5e8d4495-75e9-4399-ba43-dedd032edcb2","jpg","615be8575f83acf3927cd72c4ff6f199"],
+["ifsa-rebrand","IFSA Rebrand","3e1e5cd7-8161-442f-b5b0-c7934eaa31df","jpg","95755df8f76b5d46f111093e26561481"],
+["university-federal-credit-union-sba-sales-collateral","UFCU SBA Sales Collateral","eed9f81d-7972-4bb1-b69e-d3d47036c5a7","jpg","6953eb85a209264dab7154bf70043990"],
+["alex-autohaus","Alex AutoHaus","b37f3e98-9a5f-49e0-a0d8-048b2d96973d","jpg","7d53017deb7c4680f85a57709d0bf96b"]];
+
+const img=p=>`${B}${p[2]}${C}${p[3]}?h=${p[4]}`;
+const ALL=[
+  ...UX.map(p=>({p,cat:"UX"})),
+  ...CD.map(p=>({p,cat:"Creative Direction"})),
+  ...DS.map(p=>({p,cat:"Design"}))
+];
+
+// hero reel
+const pick=(arr,n,off)=>Array.from({length:n},(_,i)=>arr[(i*3+off)%arr.length]);
+const reelA=pick([...UX.slice(0,20)],10,0), reelB=pick([...CD.slice(0,18),...DS.slice(0,8)],10,1);
+const fill=(el,list)=>{const h=list.map(p=>`<img src="${img(p)}" alt="" loading="lazy">`).join('');el.innerHTML=h+h;};
+fill(document.getElementById('stripA'),reelA);fill(document.getElementById('stripB'),reelB);
+
+// clients marquee
+const names=["ForceUSA","Vanderhall","Samsung","TaylorMed MRI","Sportsman's Warehouse","Everlights","Java House","TAB Bank","Ziwi","Cox for Governor","Utah GOED","Daz 3D","Klymit","Pret Helmets","Access Medical","Snowbasin"];
+document.getElementById('names').innerHTML=[...names,...names].map(n=>`<span>${n}</span>`).join('');
+
+// archive
+const cats=["All","UX","Creative Direction","Design"];
+let cur="All", shown=12;
+const F=document.getElementById('filters'), I=document.getElementById('index'), M=document.getElementById('moreBtn');
+const arrow='<svg viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M5 2h7v7" stroke="currentColor" stroke-width="1.6"/></svg>';
+F.innerHTML=cats.map(c=>`<button type="button" id="f-${c.replace(/\s/g,'')}" aria-pressed="${c===cur}" data-c="${c}">${c}<small>${c==="All"?ALL.length:ALL.filter(x=>x.cat===c).length}</small></button>`).join('');
+function render(){
+  const list=cur==="All"?ALL:ALL.filter(x=>x.cat===cur);
+  I.innerHTML=list.slice(0,shown).map(({p,cat})=>`<a class="row" href="${S}${p[0]}" target="_blank" rel="noopener"><img src="${img(p)}" alt="" loading="lazy"><h4>${p[1]}</h4><span class="cat">${cat}</span><span class="go">${arrow}</span></a>`).join('');
+  M.parentElement.hidden = shown>=list.length;
+  M.textContent=`Show ${Math.min(12,list.length-shown)} more`;
+}
+F.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;cur=b.dataset.c;shown=12;F.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));render();});
+M.addEventListener('click',()=>{shown+=12;render();});
+render();
+</script>
+</body>
+</html>
