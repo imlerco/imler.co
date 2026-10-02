@@ -21,8 +21,10 @@
   --ink-2:#1B1D22;        /* raised ink */
   --mute:#6D6B66;         /* secondary text on paper */
   --mute-ink:#9A9CA3;     /* secondary text on ink */
-  --signal:#3B5BFF;       /* ultramarine accent */
-  --signal-hot:#8FA2FF;   /* accent on ink */
+  --signal:#005a62;       /* teal accent: buttons + links */
+  --signal-hot:#9dd8e4;   /* hover / accent on ink */
+  --link:#dfe456;         /* links */
+  --link-hover:#9dd8e4;   /* link hover */
   --line:rgba(16,17,20,.14);
   --line-ink:rgba(255,255,255,.12);
   --display:"franklin-gothic-urw",ui-sans-serif,system-ui,sans-serif;
@@ -56,14 +58,14 @@ img{max-width:100%;display:block}
 .logo img{display:block;height:30px;width:auto}
 .logo i{width:26px;height:26px;border-radius:7px;background:var(--signal);display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:900;color:#fff;font-stretch:100%}
 .nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
-.nav ul a{display:block;padding:8px 12px;border-radius:9px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute-ink);transition:color .2s,background .2s}
-.nav ul a:hover{color:#fff;background:rgba(255,255,255,.06)}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border-radius:11px;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;transition:transform .2s,background .2s;white-space:nowrap}
+.nav ul a{display:block;padding:8px 12px;border-radius:9px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--link);transition:color .2s,background .2s}
+.nav ul a:hover{color:var(--link-hover);background:rgba(255,255,255,.06)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border-radius:11px;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;transition:transform .2s,background .2s,color .2s;white-space:nowrap;background:var(--signal);color:#fff}
+.btn:hover{background:var(--signal-hot);color:var(--signal)}
+.btn-light{background:var(--link);color:var(--ink)}
+.btn-light:hover{background:var(--link-hover);color:var(--ink)}
 .btn svg{width:14px;height:14px;transition:transform .2s}
 .btn:hover svg{transform:translateX(3px)}
-.btn-light{background:#F4F3EF;color:var(--ink)}
-.btn-dark{background:var(--ink-2);color:#F4F3EF;border:1px solid var(--line-ink)}
-.btn-signal{background:var(--signal);color:#fff}
 .nav .btn{padding:10px 14px}
 section[id]{scroll-margin-top:96px}
 @media (max-width:860px){.nav ul{display:none}}
@@ -97,7 +99,8 @@ h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px #F4F3EF}
 .sec{padding-block:clamp(40px,6vw,88px)}
 .sec-head{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:clamp(20px,3vw,36px);padding-inline:4px}
 h2{font-family:var(--display);font-weight:700;font-stretch:108%;letter-spacing:-.03em;line-height:.95;margin:6px 0 0;font-size:clamp(36px,5.2vw,76px);text-wrap:balance}
-.link-arrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px}
+.link-arrow:hover{color:var(--ink)}
+.link-arrow{color:var(--signal);display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px}
 
 /* ---------- FEATURED CARDS ---------- */
 .cards{display:grid;gap:var(--gut)}
@@ -191,8 +194,8 @@ details[open] .plus{transform:rotate(45deg);background:var(--signal);border-colo
 .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;margin-top:clamp(56px,8vw,110px);padding-top:28px;border-top:1px solid var(--line-ink)}
 .foot h5{margin:0 0 12px;font-family:var(--body);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute-ink);font-weight:400}
 .foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.foot a{color:#E4E5E9;transition:color .2s}
-.foot a:hover{color:var(--signal-hot)}
+.foot a{color:var(--link);transition:color .2s}
+.foot a:hover{color:var(--link-hover)}
 .foot p{margin:0;color:#B9BAC1;max-width:32ch}
 .copy{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute-ink)}
 @media (max-width:760px){.foot{grid-template-columns:1fr 1fr}.foot > div:first-child{grid-column:1/-1}}
@@ -223,7 +226,7 @@ details[open] .plus{transform:rotate(45deg);background:var(--signal);border-colo
   <div class="hero-copy">
     <div class="bracket">( Frank Imler <b>/</b> Creative Director )</div>
     <h1>Big ideas.<br><em>Real</em> results.</h1>
-    <p class="hero-sub">15 years turning ambitious ideas into work that gets noticed and gets results. Creative Director by title. UX designer by obsession.</p>
+    <p class="hero-sub">I turn ambitious ideas into creative work that gets noticed and gets results.</p>
     <div class="hero-ctas">
       <a class="btn btn-light" href="#work">View the work <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></a>
       <a class="btn btn-dark" href="#contact">Start a project <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></a>
@@ -304,13 +307,13 @@ details[open] .plus{transform:rotate(45deg);background:var(--signal);border-colo
     </a>
 
     <div class="pair">
-      <a class="card" href="https://frankimler.myportfolio.com/everlights-website" target="_blank" rel="noopener">
-        <img loading="lazy" src="https://cdn.myportfolio.com/65f6d075-e6f2-4852-9a29-1ee21f913631/8396da5d-d5bb-452a-8c35-7437f51b9509_rw_3840.jpg?h=2bf665d68efa5cf2f9b64d16291b7c24" alt="Everlights website">
-        <span class="card-num">05 / Home Services</span>
+      <a class="card" href="https://frankimler.myportfolio.com/cedar-city-billboards" target="_blank" rel="noopener">
+        <img loading="lazy" src="https://cdn.myportfolio.com/65f6d075-e6f2-4852-9a29-1ee21f913631/48f754d2-166c-4b7b-a7f2-f550ad44d0a1_rw_1920.jpg?h=a969e203e50c1bcbcfa6f4cf09fb78d1" alt="Cedar City billboard campaign">
+        <span class="card-num">05 / Tourism</span>
         <div class="card-body"><div class="card-meta">
-          <h3>Everlights</h3>
-          <p>Permanent lighting, permanent dark mode. A premium product finally got a premium site.</p>
-          <div class="tags"><span class="tag">Brand</span><span class="tag">UX / UI</span><span class="tag">Art Direction</span></div>
+          <h3>Cedar City Billboards</h3>
+          <p>Red-rock adventure meets Shakespeare. One board, two audiences, readable at 75 mph.</p>
+          <div class="tags"><span class="tag">Creative Direction</span><span class="tag">OOH</span><span class="tag">Destination</span></div>
         </div></div>
       </a>
       <a class="card" href="https://frankimler.myportfolio.com/the-current-comic-book-series" target="_blank" rel="noopener">
