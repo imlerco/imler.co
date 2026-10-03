@@ -28,7 +28,15 @@
     <li><a href="../#archive">Archive</a></li>
     <li><a href="../resume/">Resume</a></li>
   </ul>
-  <a class="btn btn-light" href="#contact">Let's talk <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  <div class="nav-right">
+    <a class="btn btn-light" href="../letstalk/">Let's talk <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span></span><span></span></button>
+  </div>
+  <div class="mnav" id="mnav">
+    <a href="../#work">Work</a>
+    <a href="../#archive">Archive</a>
+    <a href="../resume/">Resume</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -68,8 +76,8 @@
     <div class="bracket">( Got a big idea? )</div>
     <h2>Let's make<span>it move.</span></h2>
     <div class="hero-ctas">
-      <a class="btn btn-signal" href="https://frankimler.myportfolio.com/contact" target="_blank" rel="noopener">Get in touch <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></a>
-      <a class="btn btn-dark" href="https://www.linkedin.com/in/fimler/" target="_blank" rel="noopener">LinkedIn <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></a>
+      <a class="btn btn-light" href="../letstalk/">Get in touch <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></a>
+      <a class="btn btn-outline" href="https://www.linkedin.com/in/fimler/" target="_blank" rel="noopener">LinkedIn <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></a>
     </div>
   </div>
   <div class="foot">
@@ -83,5 +91,6 @@
 
 </div>
 
+<script src="../nav.js" defer></script>
 </body>
 </html>
