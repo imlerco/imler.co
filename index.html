@@ -374,8 +374,11 @@ const fill=(el,list)=>{const h=list.map(p=>`<img src="${img(p)}" alt="" loading=
 fill(document.getElementById('stripA'),reelA);fill(document.getElementById('stripB'),reelB);
 
 // clients marquee
-const names=["ForceUSA","Vanderhall","Samsung","TaylorMed MRI","Sportsman's Warehouse","Everlights","Java House","TAB Bank","Ziwi","Cox for Governor","Utah GOED","Daz 3D","Klymit","Pret Helmets","Access Medical","Snowbasin"];
-document.getElementById('names').innerHTML=[...names,...names].map(n=>`<span>${n}</span>`).join('');
+const logos=[["forceusa","ForceUSA"],["vanderhall","Vanderhall"],["samsung","Samsung"],["taylormed","TaylorMed MRI"],["sportsmans-warehouse","Sportsman's Warehouse"],["everlights","Everlights"],["java-house","Java House"],["tab-bank","TAB Bank"],["ziwi","Ziwi"],["cox-for-governor","Cox for Governor"],["utah-goed","Utah GOED"],["daz-3d","Daz 3D"],["klymit","Klymit"],["pret-helmets","Pret Helmets"],["access-medical","Access Medical"],["snowbasin","Snowbasin"]];
+const N=document.getElementById('names');
+N.innerHTML=[...logos,...logos].map(([f,n],i)=>`<span class="logo-item"${i>=logos.length?' aria-hidden="true"':''}><img src="logo-pngs/${f}.png" alt="${i<logos.length?n:''}" data-name="${n}" loading="lazy" decoding="async"></span>`).join('');
+// if a logo file is missing, show the company name instead
+N.querySelectorAll('img').forEach(im=>im.addEventListener('error',()=>{const t=document.createElement('span');t.className='logo-text';t.textContent=im.dataset.name;im.replaceWith(t);}));
 
 </script>
 <script src="nav.js" defer></script>

@@ -83,7 +83,11 @@ h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px #F4F3EF}
 .clients .label{text-align:center;margin-bottom:22px}
 .names{display:flex;width:max-content;animation:slide 50s linear infinite}
 .names span{font-family:var(--display);font-weight:700;font-stretch:108%;font-size:clamp(26px,3.2vw,44px);letter-spacing:-.02em;padding-inline:clamp(18px,2.4vw,36px);white-space:nowrap;color:var(--ink)}
-.names span:nth-child(3n+2){color:var(--mute);font-weight:400;font-style:italic;font-stretch:90%}
+.names{align-items:center}
+.names .logo-item{display:flex;align-items:center;padding-inline:clamp(22px,3vw,48px)}
+.names .logo-item img{height:clamp(28px,3vw,42px);width:auto;max-width:170px;object-fit:contain;filter:brightness(0);opacity:.7;transition:filter .3s,opacity .3s}
+.names .logo-item img:hover{filter:none;opacity:1}
+.names .logo-text{font-family:var(--display);font-weight:700;font-size:clamp(22px,2.4vw,32px);letter-spacing:-.02em;white-space:nowrap;color:var(--ink);opacity:.7}
 
 /* ---------- SECTION HEADS ---------- */
 .sec{padding-block:clamp(40px,6vw,88px)}
