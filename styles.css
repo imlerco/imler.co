@@ -37,7 +37,7 @@ img{max-width:100%;display:block}
 .hero::before{content:"";position:absolute;inset:-20% -10% auto;height:120%;z-index:-1;
   background:radial-gradient(60% 55% at 50% 100%,rgba(var(--glow),.4),transparent 70%),radial-gradient(40% 40% at 85% 20%,rgba(var(--glow),.12),transparent 70%)}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.35;
-  background-image:linear-gradient(var(--line-ink) 1px,transparent 1px),linear-gradient(90deg,var(--line-ink) 1px,transparent 1px);background-size:64px 64px;
+  background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.22) 0 1px,transparent 1px 12px);
   mask-image:radial-gradient(70% 60% at 50% 45%,#000,transparent 80%)}
 
 .nav{position:fixed;top:calc(var(--gut) + 14px);left:calc(var(--gut) + 14px);right:calc(var(--gut) + 14px);z-index:50;max-width:calc(1360px - 28px);margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;
@@ -284,3 +284,10 @@ details[open] .plus{transform:rotate(45deg);background:var(--signal);border-colo
   .mnav a + a{border-top:1px solid var(--line)}
   .mnav a:hover{background:rgba(0,90,98,.08);color:var(--ink)}
 }
+
+/* ---------- PLAIN PAGE HEADER (case studies, let's talk) ---------- */
+.hero.hero-plain{background:none;color:var(--panel);padding-bottom:clamp(24px,4vw,48px)}
+.hero.hero-plain::before,.hero.hero-plain::after{display:none}
+.hero-plain .bracket,.hero-plain .hero-sub{color:var(--panel)}
+.hero-plain .tag{background:transparent;backdrop-filter:none;border:1px solid rgba(0,57,62,.35);color:var(--panel)}
+.hero-plain + .cs-body,.hero-plain + .talk{padding-top:clamp(16px,3vw,40px)}
