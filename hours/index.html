@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#00393e">
+<title>Imler Hours</title>
+<link rel="stylesheet" href="https://use.typekit.net/dma4zju.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: imler.co's system. Paper ground, a framed teal panel holding the running clock, then tabbed work areas.
+   Tokens copied from imler.co/styles.css so the app sits beside the portfolio. Single committed light look, like the site. */
+:root {
+  --paper: #EEEBE4;
+  --paper-2: #E3DFD6;
+  --field: #F8F6F1;
+  --ink: #101114;
+  --panel: #00393e;
+  --panel-2: #004a50;
+  --glow: 157,216,228;
+  --mute: #6D6B66;
+  --mute-ink: #9A9CA3;
+  --signal: #005a62;
+  --signal-hot: #9dd8e4;
+  --link: #dfe456;
+  --link-hover: #9dd8e4;
+  --line: rgba(16,17,20,.14);
+  --line-ink: rgba(255,255,255,.14);
+  --danger: #b3261e;
+  --live: #46D38A;
+
+  --display: "franklin-gothic-urw", "Libre Franklin", ui-sans-serif, system-ui, sans-serif;
+  --mono: "franklin-gothic-urw", "Libre Franklin", ui-sans-serif, system-ui, sans-serif;
+
+  --r: 18px;
+  --gut: clamp(10px, 1.4vw, 18px);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { background: var(--paper); color: var(--ink); }
+body {
+  font-family: var(--display); font-size: 16px; line-height: 1.5; margin: 0;
+  -webkit-font-smoothing: antialiased;
+  padding-inline: max(16px, var(--gut));
+  padding-block: var(--gut) 0;
+}
+.wrap { max-width: 1180px; margin-inline: auto; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 6px; }
+.num { font-variant-numeric: tabular-nums; }
+em.s { font-style: normal; color: var(--signal); }
+.label { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+
+/* Nav: the site's floating frosted bar */
+header.top {
+  position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--gut)); z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  background: rgba(255,255,255,.78); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid #fff; box-shadow: 0 6px 24px rgba(16,17,20,.08); border-radius: 14px;
+  padding: 10px 10px 10px 18px; margin-bottom: var(--gut);
+}
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+.brand img { height: 30px; width: auto; display: block; }
+.brand b { font-weight: 800; font-stretch: 112%; font-size: 19px; letter-spacing: -.02em; }
+.brand .label { color: var(--signal); }
+nav.tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+nav.tabs button {
+  border: 0; background: transparent; padding: 8px 12px; border-radius: 9px; cursor: pointer;
+  font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--signal);
+  transition: color .2s, background .2s;
+}
+nav.tabs button:hover { color: var(--ink); background: rgba(0,90,98,.08); }
+nav.tabs button[aria-selected="true"] { background: var(--ink); color: #F4F3EF; }
+
+/* Buttons: imler.co .btn */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 13px 18px; border-radius: 11px; border: 0; cursor: pointer; white-space: nowrap; text-decoration: none;
+  font-family: var(--mono); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 500;
+  background: var(--signal); color: #fff; transition: background .2s, color .2s;
+}
+.btn:hover { background: var(--signal-hot); color: var(--signal); }
+.btn svg { width: 14px; height: 14px; transition: transform .2s; }
+.btn:hover svg { transform: translateX(3px); }
+.btn.go { background: var(--link); color: var(--ink); }
+.btn.go:hover { background: var(--link-hover); color: var(--ink); }
+.btn.stop { background: #fff; color: var(--danger); }
+.btn.stop:hover { background: var(--danger); color: #fff; }
+.btn.outline-ink { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px #fff; }
+.btn.outline-ink:hover { background: #fff; color: var(--ink); }
+.btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.btn.ghost:hover { background: var(--ink); color: #F4F3EF; }
+.btn.small { padding: 10px 14px; font-size: 12px; }
+.btn.danger { background: transparent; color: var(--danger); box-shadow: inset 0 0 0 1px var(--danger); }
+.btn.danger:hover { background: var(--danger); color: #fff; }
+.link {
+  border: 0; background: none; padding: 0 0 3px; cursor: pointer; color: var(--signal); border-bottom: 1px solid currentColor;
+  font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+}
+.link:hover { color: var(--ink); }
+
+/* Hero panel with the clock */
+.hero {
+  position: relative; isolation: isolate; overflow: hidden; background: var(--panel); color: #F4F3EF; border-radius: var(--r);
+  padding: clamp(28px, 5vw, 56px) clamp(18px, 4vw, 48px) clamp(22px, 3vw, 32px); display: grid; gap: 22px;
+}
+.hero::before { content: ""; position: absolute; inset: -20% -10% auto; height: 130%; z-index: -1;
+  background: radial-gradient(60% 55% at 50% 100%, rgba(var(--glow), .36), transparent 70%), radial-gradient(40% 40% at 85% 15%, rgba(var(--glow), .12), transparent 70%); }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .3;
+  background-image: repeating-linear-gradient(135deg, rgba(255,255,255,.22) 0 1px, transparent 1px 12px);
+  -webkit-mask-image: radial-gradient(70% 60% at 50% 40%, #000, transparent 80%); mask-image: radial-gradient(70% 60% at 50% 40%, #000, transparent 80%); }
+.hero .label { color: var(--mute-ink); letter-spacing: .14em; }
+.clock {
+  margin: 0; font-weight: 800; font-stretch: 118%; letter-spacing: -.04em; line-height: .85;
+  font-size: clamp(64px, 14.5vw, 176px); font-variant-numeric: tabular-nums; color: #F4F3EF;
+}
+.clock .sec { color: transparent; -webkit-text-stroke: 1.5px #F4F3EF; }
+.running .clock .sec { -webkit-text-stroke-color: var(--signal-hot); }
+.status { display: flex; align-items: center; gap: 2px; flex-wrap: wrap; }
+.dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--mute-ink); margin-right: 8px; flex: none; }
+.running .dot { background: var(--live); box-shadow: 0 0 0 4px rgba(70,211,138,.15); animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 8px rgba(70,211,138,0); } }
+@media (prefers-reduced-motion: reduce) { .running .dot { animation: none; } }
+
+.timer-form { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr) auto; gap: 10px; align-items: end; }
+@media (max-width: 760px) { .timer-form { grid-template-columns: 1fr; } }
+.field { display: grid; gap: 7px; min-width: 0; }
+.field > span { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+.hero .field > span { color: var(--mute-ink); }
+.input {
+  width: 100%; min-width: 0; background: var(--field); border: 1px solid var(--line); border-radius: 11px;
+  padding: 12px 13px; font-size: 16px; color: var(--ink);
+}
+.input:focus { border-color: var(--signal); outline: none; box-shadow: 0 0 0 3px rgba(0,90,98,.14); }
+.input:disabled { opacity: .6; }
+.hero .input { background: rgba(255,255,255,.08); border-color: var(--line-ink); color: #F4F3EF; }
+.hero .input::placeholder { color: var(--mute-ink); }
+.hero .input:focus { border-color: var(--signal-hot); box-shadow: 0 0 0 3px rgba(var(--glow), .2); }
+.hero select.input option, .hero select.input optgroup { color: var(--ink); background: #fff; }
+.row-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.totals { display: flex; gap: clamp(20px, 4vw, 48px); flex-wrap: wrap; padding-top: 18px; border-top: 1px solid var(--line-ink); }
+.totals div { display: grid; gap: 4px; }
+.totals strong { font-size: clamp(24px, 2.6vw, 34px); font-weight: 700; font-stretch: 108%; letter-spacing: -.02em; line-height: 1; }
+
+/* Sections */
+section.panel { padding-block: clamp(32px, 5vw, 64px) 0; }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: clamp(18px, 2.4vw, 28px); padding-inline: 4px; }
+.sec-head h2 { margin: 6px 0 0; font-weight: 700; font-stretch: 108%; letter-spacing: -.03em; line-height: .95; font-size: clamp(32px, 4.6vw, 60px); text-wrap: balance; }
+
+.box { background: var(--paper-2); border-radius: var(--r); padding: clamp(18px, 2.4vw, 28px); }
+.manual { display: grid; grid-template-columns: minmax(0, 1.3fr) 160px 130px minmax(0, 1.6fr) auto; gap: 10px; align-items: end; }
+@media (max-width: 960px) { .manual { grid-template-columns: 1fr 1fr; } .manual .wide { grid-column: 1 / -1; } }
+@media (max-width: 480px) { .manual { grid-template-columns: 1fr; } }
+.hint { font-size: 14px; color: var(--mute); margin: 12px 0 0; }
+.err { color: var(--danger); font-size: 14px; margin: 6px 0 0; min-height: 1em; }
+
+/* Entries: the site's archive index */
+.day { margin-bottom: 26px; }
+.day-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 4px 8px; border-bottom: 1px solid var(--ink); }
+.day-head h3 { margin: 0; font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+.entry {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: clamp(12px, 2vw, 24px); align-items: center;
+  padding: 12px 4px; border-bottom: 1px solid var(--line); transition: background .2s, padding .25s;
+}
+.entry:hover { background: var(--paper-2); padding-inline: 12px; }
+.entry .who { min-width: 0; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.2; }
+.entry .who b { font-weight: 600; font-stretch: 104%; letter-spacing: -.015em; }
+.entry .who .proj { color: var(--mute); }
+.entry .notes { color: var(--mute); font-size: 14px; margin-top: 3px; overflow-wrap: anywhere; }
+.entry .dur { font-weight: 700; font-stretch: 108%; font-variant-numeric: tabular-nums; font-size: clamp(18px, 1.8vw, 22px); letter-spacing: -.01em; }
+.entry .acts { display: flex; gap: 6px; }
+.icon-btn {
+  width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); background: transparent;
+  cursor: pointer; display: grid; place-items: center; color: var(--ink); transition: background .2s, color .2s, border-color .2s;
+}
+.icon-btn:hover { background: var(--signal); border-color: var(--signal); color: #fff; }
+.icon-btn svg { width: 12px; height: 12px; }
+.tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; background: rgba(0,90,98,.1); color: var(--signal); padding: 3px 7px; border-radius: 6px; margin-left: 8px; vertical-align: 2px; }
+.empty { padding: 28px; border: 1px dashed var(--line); border-radius: var(--r); color: var(--mute); text-align: center; }
+
+.banner {
+  display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap;
+  background: var(--signal); color: #fff; border-radius: 14px; padding: 12px 12px 12px 18px; margin-top: 8px; font-size: 15px;
+}
+.banner .btn { background: var(--link); color: var(--ink); }
+.banner .btn:hover { background: var(--link-hover); }
+
+/* Reports */
+.filters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: var(--gut); }
+@media (max-width: 760px) { .filters { grid-template-columns: 1fr 1fr; } }
+.kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gut); margin-bottom: clamp(24px, 3vw, 40px); }
+@media (max-width: 640px) { .kpis { grid-template-columns: 1fr 1fr; } .kpis > div:first-child { grid-column: 1 / -1; } }
+.kpis > div { background: var(--paper-2); border-radius: var(--r); padding: clamp(16px, 2vw, 24px); display: flex; flex-direction: column; justify-content: space-between; gap: 22px; min-height: 150px; }
+.kpis > div.accent { background: var(--signal); color: #fff; }
+.kpis > div.accent .label { color: rgba(255,255,255,.8); }
+.kpis strong { font-weight: 800; font-stretch: 118%; letter-spacing: -.045em; line-height: .85; font-size: clamp(40px, 5.4vw, 80px); font-variant-numeric: tabular-nums; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; min-width: 540px; }
+th { text-align: left; font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); padding: 8px 10px; border-bottom: 1px solid var(--ink); }
+td { padding: 12px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+th.r, td.r { text-align: right; }
+tr.client td { font-weight: 600; }
+tr.client td:first-child { font-size: 18px; font-stretch: 104%; letter-spacing: -.015em; }
+tr.proj td:first-child { padding-left: 28px; color: var(--mute); }
+.bar { height: 6px; background: var(--paper-2); border-radius: 3px; overflow: hidden; min-width: 80px; }
+.bar i { display: block; height: 100%; background: var(--signal); border-radius: 3px; }
+tr.client .bar i { background: var(--ink); }
+
+/* Clients */
+.add-client { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; max-width: 560px; margin-bottom: var(--gut); }
+.clients { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: var(--gut); }
+.client-card { background: var(--paper-2); border-radius: var(--r); padding: clamp(18px, 2.2vw, 26px); display: grid; gap: 14px; align-content: start; }
+.client-card h3 { margin: 0; font-size: clamp(22px, 2.2vw, 28px); font-weight: 700; font-stretch: 108%; letter-spacing: -.02em; line-height: 1.05; display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.client-card ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.client-card li { display: flex; justify-content: space-between; gap: 10px; padding-block: 10px; border-top: 1px solid var(--line); font-size: 15px; }
+.client-card li .pname { border: 0; background: none; padding: 0; cursor: pointer; text-align: left; color: var(--ink); }
+.client-card li .pname:hover { color: var(--signal); }
+.client-card li span:last-child { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--mute); white-space: nowrap; }
+.client-card li.archived .pname { color: var(--mute); text-decoration: line-through; }
+.data-tools { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+/* Dialogs */
+dialog {
+  border: 0; border-radius: var(--r); padding: 0; background: var(--paper); color: var(--ink);
+  width: min(540px, calc(100vw - 32px)); max-height: calc(100vh - 32px); box-shadow: 0 24px 60px rgba(16,17,20,.25);
+}
+dialog::backdrop { background: rgba(0,57,62,.55); backdrop-filter: blur(3px); }
+dialog form, dialog .dlg { padding: clamp(20px, 3vw, 28px); display: grid; gap: 14px; }
+dialog h2 { margin: 0; font-size: 30px; font-weight: 700; font-stretch: 108%; letter-spacing: -.03em; line-height: 1; }
+.dlg-actions { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding-top: 4px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.check { display: flex; gap: 8px; align-items: center; font-size: 15px; }
+textarea.input { min-height: 180px; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; }
+
+/* Footer: the site's teal footer band */
+footer.foot {
+  margin-top: clamp(40px, 6vw, 80px); background: var(--panel); color: var(--mute-ink); border-radius: var(--r) var(--r) 0 0;
+  padding: 22px clamp(18px, 4vw, 48px); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+}
+footer.foot a { color: var(--link); text-decoration: none; }
+footer.foot a:hover { color: var(--link-hover); }
+
+.toast {
+  position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%) translateY(20px);
+  background: var(--ink); color: #F4F3EF; padding: 12px 18px; border-radius: 11px; z-index: 30;
+  font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+  opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; max-width: calc(100vw - 32px);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#track"><img src="../imlerco_logo.png" alt="Imler + Co"><span class="label">( Hours )</span></a>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button role="tab" data-tab="track" aria-selected="true">Track</button>
+      <button role="tab" data-tab="reports" aria-selected="false">Reports</button>
+      <button role="tab" data-tab="clients" aria-selected="false">Clients</button>
+    </nav>
+  </header>
+
+  <!-- TRACK -->
+  <div data-view="track">
+    <div class="hero" id="hero">
+      <div class="status"><span class="dot"></span><span class="label" id="status-label">( Not running )</span></div>
+      <p class="clock" id="clock" aria-live="off">0:00<span class="sec">:00</span></p>
+      <div class="timer-form">
+        <label class="field"><span>Client / project</span>
+          <select class="input" id="t-project"></select>
+        </label>
+        <label class="field"><span>What are you working on?</span>
+          <input class="input" id="t-notes" placeholder="Homepage wireframes, round 2" autocomplete="off">
+        </label>
+        <div class="row-actions">
+          <button class="btn go" id="t-toggle" type="button">Start timer</button>
+          <button class="btn outline-ink" id="t-discard" type="button" hidden>Discard</button>
+        </div>
+      </div>
+      <div class="totals">
+        <div><span class="label">Today</span><strong class="num" id="tot-today">0:00</strong></div>
+        <div><span class="label">This week</span><strong class="num" id="tot-week">0:00</strong></div>
+        <div><span class="label">This month</span><strong class="num" id="tot-month">0:00</strong></div>
+      </div>
+    </div>
+
+    <section class="panel">
+      <div class="sec-head">
+        <div><span class="label">( Add time )</span><h2>Forgot to hit start? <em class="s">Log it.</em></h2></div>
+      </div>
+      <div class="box">
+      <form class="manual" id="m-form" novalidate>
+        <label class="field wide"><span>Client / project</span><select class="input" id="m-project"></select></label>
+        <label class="field"><span>Date</span><input class="input" type="date" id="m-date"></label>
+        <label class="field"><span>Time spent</span><input class="input num" id="m-dur" placeholder="1:30" inputmode="decimal" autocomplete="off"></label>
+        <label class="field wide"><span>Notes</span><input class="input" id="m-notes" placeholder="Client call + revisions" autocomplete="off"></label>
+        <button class="btn" type="submit">Add time</button>
+      </form>
+      <p class="hint">Time spent accepts 1:30, 1.5, 90m or 1h 30m.</p>
+      <p class="err" id="m-err" role="alert"></p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="sec-head">
+        <div><span class="label">( Recent )</span><h2>Logged time</h2></div>
+        <button class="link" type="button" data-goto="reports">See all in Reports</button>
+      </div>
+      <div id="recent"></div>
+      <div class="banner" id="example-banner" hidden>
+        <span>You're looking at example clients and hours so you can see how it works.</span>
+        <button class="btn small" type="button" id="clear-examples">Clear examples and start fresh</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- REPORTS -->
+  <div data-view="reports" hidden>
+    <section class="panel">
+      <div class="sec-head">
+        <div><span class="label">( Reports )</span><h2>Where the hours <em class="s">went.</em></h2></div>
+        <button class="btn ghost small" type="button" id="export-csv">Export CSV</button>
+      </div>
+      <div class="filters">
+        <label class="field"><span>Period</span>
+          <select class="input" id="r-range">
+            <option value="week">This week</option>
+            <option value="lastweek">Last week</option>
+            <option value="month" selected>This month</option>
+            <option value="lastmonth">Last month</option>
+            <option value="year">This year</option>
+            <option value="all">All time</option>
+            <option value="custom">Custom dates</option>
+          </select>
+        </label>
+        <label class="field"><span>Client</span><select class="input" id="r-client"></select></label>
+        <label class="field"><span>From</span><input class="input" type="date" id="r-from"></label>
+        <label class="field"><span>To</span><input class="input" type="date" id="r-to"></label>
+      </div>
+      <div class="kpis">
+        <div class="accent"><span class="label">Hours</span><strong id="k-hours">0</strong></div>
+        <div><span class="label">Billable</span><strong id="k-amount">$0</strong></div>
+        <div><span class="label">Entries</span><strong id="k-count">0</strong></div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Client / project</th><th class="r">Hours</th><th class="r">Rate</th><th class="r">Amount</th><th style="width:22%">Share</th></tr></thead>
+        <tbody id="r-body"></tbody>
+      </table></div>
+    </section>
+    <section class="panel">
+      <div class="sec-head"><div><span class="label">( Detail )</span><h2>Every entry in this period</h2></div></div>
+      <div id="r-entries"></div>
+    </section>
+  </div>
+
+  <!-- CLIENTS -->
+  <div data-view="clients" hidden>
+    <section class="panel">
+      <div class="sec-head"><div><span class="label">( Clients )</span><h2>Who you're <em class="s">working</em> for.</h2></div></div>
+      <form class="add-client" id="c-form" novalidate>
+        <input class="input" id="c-name" placeholder="New client name" autocomplete="off" aria-label="New client name">
+        <button class="btn" type="submit">Add client</button>
+      </form>
+      <div class="clients" id="clients"></div>
+    </section>
+    <section class="panel">
+      <div class="sec-head"><div><span class="label">( Your data )</span><h2>Back up and restore</h2></div></div>
+      <p class="hint" style="margin:0 0 16px;max-width:62ch;padding-inline:4px">Everything is saved in this browser on this device. Download a backup now and then, and use it to move your hours to another computer.</p>
+      <div class="data-tools">
+        <button class="btn ghost small" type="button" id="backup">Download backup</button>
+        <label class="btn ghost small" for="restore-file">Restore from backup</label>
+        <input type="file" id="restore-file" accept="application/json,.json" hidden>
+      </div>
+    </section>
+  </div>
+
+  <footer class="foot">
+    <span>© 2026 Frank Imler</span>
+    <span>Hours are saved in this browser</span>
+  </footer>
+</div>
+
+<!-- Entry editor -->
+<dialog id="d-entry">
+  <form method="dialog" id="e-form" novalidate>
+    <h2>Edit entry</h2>
+    <label class="field"><span>Client / project</span><select class="input" id="e-project"></select></label>
+    <div class="two">
+      <label class="field"><span>Date</span><input class="input" type="date" id="e-date"></label>
+      <label class="field"><span>Time spent</span><input class="input num" id="e-dur" inputmode="decimal" autocomplete="off"></label>
+    </div>
+    <label class="field"><span>Notes</span><input class="input" id="e-notes" autocomplete="off"></label>
+    <p class="err" id="e-err" role="alert"></p>
+    <div class="dlg-actions">
+      <button class="btn danger small" type="button" id="e-delete">Delete</button>
+      <div class="row-actions">
+        <button class="btn ghost small" type="button" data-close>Cancel</button>
+        <button class="btn small" type="submit">Save</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<!-- Project editor -->
+<dialog id="d-project">
+  <form method="dialog" id="p-form" novalidate>
+    <h2 id="p-title">New project</h2>
+    <label class="field"><span>Client</span><select class="input" id="p-client"></select></label>
+    <label class="field" id="p-newclient-wrap" hidden><span>New client name</span><input class="input" id="p-newclient" autocomplete="off"></label>
+    <label class="field"><span>Project name</span><input class="input" id="p-name" autocomplete="off" placeholder="Brand refresh"></label>
+    <label class="field"><span>Hourly rate (optional)</span><input class="input num" id="p-rate" inputmode="decimal" placeholder="125" autocomplete="off"></label>
+    <label class="check" id="p-archived-wrap" hidden><input type="checkbox" id="p-archived"> Archived (hidden from the timer)</label>
+    <p class="err" id="p-err" role="alert"></p>
+    <div class="dlg-actions">
+      <span></span>
+      <div class="row-actions">
+        <button class="btn ghost small" type="button" data-close>Cancel</button>
+        <button class="btn small" type="submit">Save</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<!-- Export -->
+<dialog id="d-export">
+  <div class="dlg">
+    <h2 id="x-title">Export</h2>
+    <p class="hint" style="margin:0" id="x-hint"></p>
+    <textarea class="input" id="x-text" readonly aria-label="Export contents"></textarea>
+    <div class="dlg-actions">
+      <button class="btn ghost small" type="button" data-close>Close</button>
+      <div class="row-actions">
+        <button class="btn ghost small" type="button" id="x-copy">Copy</button>
+        <button class="btn small" type="button" id="x-download">Download file</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(() => {
+  const KEY = "imler-hours-v1";
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  // ---------- dates ----------
+  const pad = n => String(n).padStart(2, "0");
+  const ymd = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const parseYmd = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
+  const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+  const startOfWeek = d => { const x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); const wd = (x.getDay() + 6) % 7; return addDays(x, -wd); }; // Monday
+  const fmtDay = s => {
+    const d = parseYmd(s), today = ymd(new Date()), yest = ymd(addDays(new Date(), -1));
+    if (s === today) return "Today";
+    if (s === yest) return "Yesterday";
+    return d.toLocaleDateString(undefined, { weekday: "long", month: "short", day: "numeric", year: d.getFullYear() === new Date().getFullYear() ? undefined : "numeric" });
+  };
+
+  // ---------- durations ----------
+  const hm = sec => { const m = Math.round(sec / 60); return `${Math.floor(m / 60)}:${pad(m % 60)}`; };
+  const hours = sec => (sec / 3600);
+  const hrs2 = sec => hours(sec).toFixed(2);
+  function parseDuration(str) {
+    const s = String(str || "").trim().toLowerCase();
+    if (!s) return null;
+    let m;
+    if ((m = s.match(/^(\d+):([0-5]?\d)$/))) return (+m[1] * 60 + +m[2]) * 60;
+    if ((m = s.match(/^(\d*\.?\d+)\s*h?$/))) return Math.round(parseFloat(m[1]) * 3600);
+    if ((m = s.match(/^(\d+)\s*m(in)?$/))) return +m[1] * 60;
+    if ((m = s.match(/^(\d*\.?\d+)\s*h(rs?|ours?)?\s*(\d+)\s*m(in)?$/))) return Math.round(parseFloat(m[1]) * 3600) + +m[3] * 60;
+    return null;
+  }
+  const money = n => n.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: n >= 1000 ? 0 : 2 });
+
+  // ---------- state ----------
+  let S = load();
+  function blank() { return { clients: [], projects: [], entries: [], running: null, example: false }; }
+  function load() {
+    try { const raw = localStorage.getItem(KEY); if (raw) return Object.assign(blank(), JSON.parse(raw)); } catch (e) {}
+    return seed();
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+  function seed() {
+    const s = blank(); s.example = true;
+    const c = (name) => { const o = { id: uid(), name }; s.clients.push(o); return o; };
+    const p = (client, name, rate) => { const o = { id: uid(), clientId: client.id, name, rate, archived: false }; s.projects.push(o); return o; };
+    const a = c("Vanderhall Motor Works"), b = c("Cedar City"), d = c("TAFI");
+    const p1 = p(a, "Spring campaign", 135), p2 = p(a, "Website UX audit", 135), p3 = p(b, "Brand guidelines", 110), p4 = p(d, "Packaging concepts", 120);
+    const today = new Date();
+    const log = [[0, p1, 2.25, "Campaign key visuals"], [0, p3, 1.0, "Logo lockup revisions"], [1, p2, 3.5, "Checkout flow review"], [1, p1, 1.5, "Client call + notes"],
+      [2, p4, 4.0, "Three concept directions"], [3, p3, 2.75, "Color + type pages"], [4, p2, 2.0, "Heuristic findings deck"], [6, p4, 1.25, "Dieline check"],
+      [8, p1, 3.0, "Storyboards"], [10, p3, 2.5, "Kickoff workshop"], [13, p2, 1.75, "Analytics review"]];
+    for (const [ago, proj, h, notes] of log) s.entries.push({ id: uid(), projectId: proj.id, date: ymd(addDays(today, -ago)), seconds: Math.round(h * 3600), notes, source: "manual" });
+    s.lastProjectId = p1.id;
+    return s;
+  }
+
+  const client = id => S.clients.find(c => c.id === id);
+  const project = id => S.projects.find(p => p.id === id);
+  const projLabel = p => p ? `${client(p.clientId)?.name ?? "No client"} / ${p.name}` : "Unknown project";
+
+  // ---------- toast ----------
+  let toastT;
+  function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), 2200); }
+
+  // ---------- project selects ----------
+  function fillProjectSelect(sel, selected, { includeArchived = false, allowNew = true } = {}) {
+    const groups = S.clients.map(c => {
+      const ps = S.projects.filter(p => p.clientId === c.id && (includeArchived || !p.archived || p.id === selected));
+      if (!ps.length) return "";
+      return `<optgroup label="${esc(c.name)}">${ps.map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join("")}</optgroup>`;
+    }).join("");
+    sel.innerHTML = (groups || `<option value="" disabled>No projects yet</option>`) + (allowNew ? `<option value="__new">+ New client or project…</option>` : "");
+    if (selected && project(selected)) sel.value = selected;
+    else { const first = sel.querySelector("option[value]:not([value='__new']):not([disabled])"); sel.value = first ? first.value : ""; }
+    sel.dataset.prev = sel.value;
+  }
+  function wireNewOption(sel) {
+    sel.addEventListener("change", () => {
+      if (sel.value === "__new") { sel.value = sel.dataset.prev || ""; openProject(null, null, newId => { renderAll(); sel.value = newId; sel.dataset.prev = newId; }); }
+      else sel.dataset.prev = sel.value;
+    });
+  }
+
+  // ---------- timer ----------
+  const elapsed = () => S.running ? Math.max(0, Math.floor((Date.now() - S.running.start) / 1000)) : 0;
+  function renderClock() {
+    const sec = elapsed(), h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60), s = sec % 60;
+    $("#clock").innerHTML = `${h}:${pad(m)}<span class="sec">:${pad(s)}</span>`;
+    document.title = S.running ? `${h}:${pad(m)}:${pad(s)} · ${project(S.running.projectId)?.name ?? ""}` : "Imler Hours";
+  }
+  function renderTimer() {
+    const on = !!S.running;
+    $("#hero").classList.toggle("running", on);
+    $("#t-toggle").textContent = on ? "Stop" : "Start timer";
+    $("#t-toggle").classList.toggle("go", !on); $("#t-toggle").classList.toggle("stop", on);
+    $("#t-discard").hidden = !on;
+    if (on) {
+      const st = new Date(S.running.start);
+      $("#status-label").textContent = `( Running since ${st.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })} )`;
+    } else $("#status-label").textContent = "( Not running )";
+    fillProjectSelect($("#t-project"), on ? S.running.projectId : S.lastProjectId);
+    if (on && document.activeElement !== $("#t-notes")) $("#t-notes").value = S.running.notes || "";
+    renderClock();
+  }
+  function startTimer(projectId, notes) {
+    if (!projectId || !project(projectId)) { toast("Pick or add a project first"); return; }
+    if (S.running) stopTimer(true);
+    S.running = { projectId, notes: notes || "", start: Date.now() };
+    S.lastProjectId = projectId;
+    save(); renderAll(); toast("Timer started");
+  }
+  function stopTimer(silent) {
+    if (!S.running) return;
+    const sec = elapsed(), r = S.running;
+    S.running = null;
+    if (sec >= 30) {
+      S.entries.push({ id: uid(), projectId: r.projectId, date: ymd(new Date(r.start)), seconds: sec, notes: r.notes, source: "timer", start: r.start });
+      if (!silent) toast(`Logged ${hm(sec)} to ${project(r.projectId)?.name ?? "project"}`);
+    } else if (!silent) toast("Under 30 seconds, so nothing was logged");
+    $("#t-notes").value = "";
+    save(); renderAll();
+  }
+  $("#t-toggle").addEventListener("click", () => S.running ? stopTimer() : startTimer($("#t-project").value, $("#t-notes").value.trim()));
+  $("#t-discard").addEventListener("click", () => { S.running = null; $("#t-notes").value = ""; save(); renderAll(); toast("Timer discarded"); });
+  $("#t-project").addEventListener("change", () => {
+    const v = $("#t-project").value;
+    if (v === "__new") return;
+    if (S.running) { S.running.projectId = v; } S.lastProjectId = v; save(); renderClock();
+  });
+  $("#t-notes").addEventListener("input", () => { if (S.running) { S.running.notes = $("#t-notes").value; save(); } });
+  $("#t-notes").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); $("#t-toggle").click(); } });
+  setInterval(() => { if (S.running) { renderClock(); renderTotals(); } }, 1000);
+
+  // ---------- totals ----------
+  function sumBetween(from, to) { // inclusive ymd strings
+    let t = S.entries.filter(e => e.date >= from && e.date <= to).reduce((a, e) => a + e.seconds, 0);
+    if (S.running) { const d = ymd(new Date(S.running.start)); if (d >= from && d <= to) t += elapsed(); }
+    return t;
+  }
+  function renderTotals() {
+    const now = new Date(), today = ymd(now);
+    $("#tot-today").textContent = hm(sumBetween(today, today));
+    $("#tot-week").textContent = hm(sumBetween(ymd(startOfWeek(now)), today));
+    $("#tot-month").textContent = hm(sumBetween(ymd(new Date(now.getFullYear(), now.getMonth(), 1)), today));
+  }
+
+  // ---------- manual ----------
+  $("#m-date").value = ymd(new Date());
+  $("#m-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const pid = $("#m-project").value, sec = parseDuration($("#m-dur").value), date = $("#m-date").value;
+    const err = $("#m-err");
+    if (!pid || !project(pid)) return err.textContent = "Choose a client and project, or add a new one from the list.";
+    if (!date) return err.textContent = "Pick the date you did the work.";
+    if (!sec || sec <= 0) return err.textContent = "Enter time spent like 1:30 or 1.5.";
+    if (sec > 24 * 3600) return err.textContent = "That's more than 24 hours. Split it across days.";
+    err.textContent = "";
+    S.entries.push({ id: uid(), projectId: pid, date, seconds: sec, notes: $("#m-notes").value.trim(), source: "manual" });
+    S.lastProjectId = pid;
+    $("#m-dur").value = ""; $("#m-notes").value = "";
+    save(); renderAll(); toast(`Added ${hm(sec)} to ${project(pid).name}`);
+  });
+
+  // ---------- entries list ----------
+  const ICON_PLAY = `<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>`;
+  const ICON_EDIT = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10.5 2.5l3 3L5 14H2v-3z"/></svg>`;
+  function entriesHTML(list, { empty = "No time logged yet." } = {}) {
+    if (!list.length) return `<div class="empty">${esc(empty)}</div>`;
+    const byDay = new Map();
+    [...list].sort((a, b) => b.date.localeCompare(a.date) || (b.start || 0) - (a.start || 0)).forEach(e => { if (!byDay.has(e.date)) byDay.set(e.date, []); byDay.get(e.date).push(e); });
+    return [...byDay].map(([day, es]) => `
+      <div class="day">
+        <div class="day-head"><h3>${esc(fmtDay(day))}</h3><span class="label num">${hm(es.reduce((a, e) => a + e.seconds, 0))}</span></div>
+        ${es.map(e => { const p = project(e.projectId); return `
+          <div class="entry">
+            <div class="who"><b>${esc(client(p?.clientId)?.name ?? "No client")}</b> <span class="proj">/ ${esc(p?.name ?? "Deleted project")}</span>${e.source === "timer" ? `<span class="tag">Timer</span>` : ""}
+              ${e.notes ? `<div class="notes">${esc(e.notes)}</div>` : ""}</div>
+            <span class="dur">${hm(e.seconds)}</span>
+            <span class="acts">
+              <button class="icon-btn" type="button" data-resume="${e.id}" title="Start timer on this again" aria-label="Start timer on ${esc(p?.name ?? "")} again">${ICON_PLAY}</button>
+              <button class="icon-btn" type="button" data-edit="${e.id}" title="Edit" aria-label="Edit entry">${ICON_EDIT}</button>
+            </span>
+          </div>`; }).join("")}
+      </div>`).join("");
+  }
+  function renderRecent() {
+    const cutoff = ymd(addDays(new Date(), -13));
+    const list = S.entries.filter(e => e.date >= cutoff);
+    $("#recent").innerHTML = entriesHTML(list, { empty: "Nothing in the last two weeks. Start the timer or add time above." });
+    $("#example-banner").hidden = !S.example;
+  }
+  document.addEventListener("click", e => {
+    const r = e.target.closest("[data-resume]"); if (r) { const en = S.entries.find(x => x.id === r.dataset.resume); if (en) { $("#t-notes").value = en.notes || ""; startTimer(en.projectId, en.notes); showTab("track"); window.scrollTo({ top: 0, behavior: "smooth" }); } return; }
+    const ed = e.target.closest("[data-edit]"); if (ed) { openEntry(ed.dataset.edit); return; }
+    const g = e.target.closest("[data-goto]"); if (g) { showTab(g.dataset.goto); return; }
+    const c = e.target.closest("[data-close]"); if (c) { c.closest("dialog").close(); return; }
+    const ep = e.target.closest("[data-edit-project]"); if (ep) { openProject(ep.dataset.editProject); return; }
+    const np = e.target.closest("[data-new-project]"); if (np) { openProject(null, np.dataset.newProject); return; }
+    const rc = e.target.closest("[data-rename-client]"); if (rc) { renameClient(rc.dataset.renameClient); return; }
+  });
+
+  // ---------- entry editor ----------
+  let editingId = null, delArmed = false;
+  function openEntry(id) {
+    const en = S.entries.find(x => x.id === id); if (!en) return;
+    editingId = id; delArmed = false; $("#e-delete").textContent = "Delete";
+    fillProjectSelect($("#e-project"), en.projectId, { includeArchived: true, allowNew: false });
+    $("#e-date").value = en.date; $("#e-dur").value = hm(en.seconds); $("#e-notes").value = en.notes || ""; $("#e-err").textContent = "";
+    $("#d-entry").showModal();
+  }
+  $("#e-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const en = S.entries.find(x => x.id === editingId); if (!en) return;
+    const sec = parseDuration($("#e-dur").value);
+    if (!sec) return $("#e-err").textContent = "Enter time spent like 1:30 or 1.5.";
+    if (!$("#e-date").value) return $("#e-err").textContent = "Pick a date.";
+    Object.assign(en, { projectId: $("#e-project").value, date: $("#e-date").value, seconds: sec, notes: $("#e-notes").value.trim() });
+    save(); $("#d-entry").close(); renderAll(); toast("Entry saved");
+  });
+  $("#e-delete").addEventListener("click", () => {
+    if (!delArmed) { delArmed = true; $("#e-delete").textContent = "Tap again to delete"; return; }
+    S.entries = S.entries.filter(x => x.id !== editingId); save(); $("#d-entry").close(); renderAll(); toast("Entry deleted");
+  });
+
+  // ---------- project editor ----------
+  let projCtx = null;
+  function openProject(projectId, clientId, onCreated) {
+    const p = projectId ? project(projectId) : null;
+    projCtx = { projectId, onCreated };
+    $("#p-title").textContent = p ? "Edit project" : "New project";
+    const sel = $("#p-client");
+    sel.innerHTML = S.clients.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join("") + `<option value="__new">+ New client…</option>`;
+    sel.value = p ? p.clientId : (clientId || (S.clients[0]?.id ?? "__new"));
+    $("#p-newclient-wrap").hidden = sel.value !== "__new"; $("#p-newclient").value = "";
+    $("#p-name").value = p?.name ?? ""; $("#p-rate").value = p?.rate ?? "";
+    $("#p-archived-wrap").hidden = !p; $("#p-archived").checked = !!p?.archived; $("#p-err").textContent = "";
+    $("#d-project").showModal();
+    (sel.value === "__new" ? $("#p-newclient") : $("#p-name")).focus();
+  }
+  $("#p-client").addEventListener("change", () => { $("#p-newclient-wrap").hidden = $("#p-client").value !== "__new"; if ($("#p-client").value === "__new") $("#p-newclient").focus(); });
+  $("#p-form").addEventListener("submit", e => {
+    e.preventDefault();
+    let cid = $("#p-client").value;
+    const name = $("#p-name").value.trim(), rateRaw = $("#p-rate").value.trim().replace(/[$,]/g, "");
+    if (cid === "__new") {
+      const cn = $("#p-newclient").value.trim();
+      if (!cn) return $("#p-err").textContent = "Give the new client a name.";
+      const ex = S.clients.find(c => c.name.toLowerCase() === cn.toLowerCase());
+      cid = ex ? ex.id : (S.clients.push({ id: uid(), name: cn }), S.clients[S.clients.length - 1].id);
+    }
+    if (!name) return $("#p-err").textContent = "Give the project a name.";
+    const rate = rateRaw === "" ? null : Number(rateRaw);
+    if (rate !== null && !(rate >= 0)) return $("#p-err").textContent = "Rate should be a number, like 125.";
+    let id;
+    if (projCtx.projectId) { const p = project(projCtx.projectId); Object.assign(p, { clientId: cid, name, rate, archived: $("#p-archived").checked }); id = p.id; }
+    else { id = uid(); S.projects.push({ id, clientId: cid, name, rate, archived: false }); S.lastProjectId = id; }
+    save(); $("#d-project").close();
+    if (projCtx.onCreated && !projCtx.projectId) projCtx.onCreated(id); else renderAll();
+    toast(projCtx.projectId ? "Project saved" : "Project added");
+  });
+
+  // ---------- clients ----------
+  $("#c-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const n = $("#c-name").value.trim(); if (!n) return;
+    const c = { id: uid(), name: n }; S.clients.push(c); $("#c-name").value = "";
+    save(); renderAll(); openProject(null, c.id);
+  });
+  function renameClient(id) {
+    const c = client(id); if (!c) return;
+    const card = document.querySelector(`[data-client-card="${id}"] h3`);
+    card.innerHTML = `<input class="input" value="${esc(c.name)}" aria-label="Client name">`;
+    const inp = card.querySelector("input"); inp.focus(); inp.select();
+    const done = () => { const v = inp.value.trim(); if (v) c.name = v; save(); renderAll(); };
+    inp.addEventListener("blur", done); inp.addEventListener("keydown", e => { if (e.key === "Enter") inp.blur(); if (e.key === "Escape") { inp.value = c.name; inp.blur(); } });
+  }
+  function renderClients() {
+    const box = $("#clients");
+    if (!S.clients.length) { box.innerHTML = `<div class="empty">No clients yet. Add your first one above.</div>`; return; }
+    box.innerHTML = S.clients.map(c => {
+      const ps = S.projects.filter(p => p.clientId === c.id);
+      const total = S.entries.filter(e => ps.some(p => p.id === e.projectId)).reduce((a, e) => a + e.seconds, 0);
+      return `<div class="client-card" data-client-card="${c.id}">
+        <h3><span>${esc(c.name)}</span><span class="label num">${hm(total)} total</span></h3>
+        <ul>${ps.map(p => `<li class="${p.archived ? "archived" : ""}"><span><button class="pname" type="button" data-edit-project="${p.id}">${esc(p.name)}</button></span><span>${p.rate != null ? money(p.rate) + "/hr" : "No rate"}</span></li>`).join("") || `<li><span style="color:var(--muted)">No projects yet</span><span></span></li>`}</ul>
+        <div class="row-actions"><button class="btn ghost small" type="button" data-new-project="${c.id}">Add project</button><button class="link" type="button" data-rename-client="${c.id}">Rename</button></div>
+      </div>`;
+    }).join("");
+  }
+
+  // ---------- reports ----------
+  function rangeDates() {
+    const now = new Date(), v = $("#r-range").value;
+    const y = now.getFullYear(), m = now.getMonth();
+    switch (v) {
+      case "week": return [ymd(startOfWeek(now)), ymd(addDays(startOfWeek(now), 6))];
+      case "lastweek": return [ymd(addDays(startOfWeek(now), -7)), ymd(addDays(startOfWeek(now), -1))];
+      case "month": return [ymd(new Date(y, m, 1)), ymd(new Date(y, m + 1, 0))];
+      case "lastmonth": return [ymd(new Date(y, m - 1, 1)), ymd(new Date(y, m, 0))];
+      case "year": return [ymd(new Date(y, 0, 1)), ymd(new Date(y, 11, 31))];
+      case "all": { const ds = S.entries.map(e => e.date).sort(); return [ds[0] || ymd(now), ds[ds.length - 1] || ymd(now)]; }
+      default: return [$("#r-from").value || "0000-01-01", $("#r-to").value || "9999-12-31"];
+    }
+  }
+  function reportEntries() {
+    const [from, to] = rangeDates(), cid = $("#r-client").value;
+    return S.entries.filter(e => e.date >= from && e.date <= to && (!cid || project(e.projectId)?.clientId === cid));
+  }
+  function renderReports() {
+    const rc = $("#r-client"), cur = rc.value;
+    rc.innerHTML = `<option value="">All clients</option>` + S.clients.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join("");
+    rc.value = client(cur) ? cur : "";
+    const custom = $("#r-range").value === "custom";
+    const [from, to] = rangeDates();
+    if (!custom) { $("#r-from").value = from; $("#r-to").value = to; }
+    $("#r-from").disabled = $("#r-to").disabled = !custom;
+
+    const list = reportEntries();
+    const total = list.reduce((a, e) => a + e.seconds, 0);
+    let amount = 0;
+    const byClient = new Map();
+    for (const e of list) {
+      const p = project(e.projectId); const cId = p?.clientId ?? "_";
+      if (!byClient.has(cId)) byClient.set(cId, { sec: 0, amt: 0, projects: new Map() });
+      const bc = byClient.get(cId); bc.sec += e.seconds;
+      const a = p?.rate ? hours(e.seconds) * p.rate : 0; bc.amt += a; amount += a;
+      bc.projects.set(e.projectId, (bc.projects.get(e.projectId) || 0) + e.seconds);
+    }
+    $("#k-hours").textContent = hm(total);
+    $("#k-amount").textContent = money(amount);
+    $("#k-count").textContent = list.length;
+    const max = Math.max(1, ...[...byClient.values()].map(b => b.sec));
+    $("#r-body").innerHTML = byClient.size ? [...byClient].sort((a, b) => b[1].sec - a[1].sec).map(([cId, b]) => `
+      <tr class="client"><td>${esc(client(cId)?.name ?? "No client")}</td><td class="r">${hm(b.sec)}</td><td class="r"></td><td class="r">${b.amt ? money(b.amt) : "–"}</td><td><div class="bar"><i style="width:${(b.sec / max * 100).toFixed(1)}%"></i></div></td></tr>
+      ${[...b.projects].sort((x, y) => y[1] - x[1]).map(([pid, sec]) => { const p = project(pid); return `<tr class="proj"><td>${esc(p?.name ?? "Deleted project")}</td><td class="r">${hm(sec)}</td><td class="r">${p?.rate != null ? money(p.rate) : "–"}</td><td class="r">${p?.rate ? money(hours(sec) * p.rate) : "–"}</td><td><div class="bar"><i style="width:${(sec / max * 100).toFixed(1)}%"></i></div></td></tr>`; }).join("")}
+    `).join("") : `<tr><td colspan="5" style="color:var(--muted)">No time in this period.</td></tr>`;
+    $("#r-entries").innerHTML = entriesHTML(list, { empty: "No entries in this period." });
+  }
+  ["#r-range", "#r-client", "#r-from", "#r-to"].forEach(s => $(s).addEventListener("change", renderReports));
+
+  // ---------- export ----------
+  let exportFile = null;
+  function openExport(title, hint, text, filename, mime) {
+    exportFile = { text, filename, mime };
+    $("#x-title").textContent = title; $("#x-hint").textContent = hint; $("#x-text").value = text;
+    $("#d-export").showModal();
+  }
+  const csvCell = v => { const s = String(v ?? ""); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+  $("#export-csv").addEventListener("click", () => {
+    const list = [...reportEntries()].sort((a, b) => a.date.localeCompare(b.date));
+    const rows = [["Date", "Client", "Project", "Hours", "Duration", "Rate", "Amount", "Notes", "Source"]];
+    for (const e of list) {
+      const p = project(e.projectId);
+      rows.push([e.date, client(p?.clientId)?.name ?? "", p?.name ?? "", hrs2(e.seconds), hm(e.seconds), p?.rate ?? "", p?.rate ? (hours(e.seconds) * p.rate).toFixed(2) : "", e.notes || "", e.source || ""]);
+    }
+    const [from, to] = rangeDates();
+    openExport("Export CSV", `${list.length} entries from ${from} to ${to}. Opens in Excel, Numbers or Google Sheets.`, rows.map(r => r.map(csvCell).join(",")).join("\n"), `hours_${from}_to_${to}.csv`, "text/csv");
+  });
+  $("#backup").addEventListener("click", () => {
+    openExport("Backup", "Save this file somewhere safe. Restore it from the Clients tab on any browser.", JSON.stringify(S, null, 2), `imler-hours-backup_${ymd(new Date())}.json`, "application/json");
+  });
+  $("#x-copy").addEventListener("click", () => {
+    const t = $("#x-text");
+    const fallback = () => { t.focus(); t.select(); toast("Selected. Press Cmd+C to copy"); };
+    try { navigator.clipboard.writeText(exportFile.text).then(() => toast("Copied"), fallback); } catch (e) { fallback(); }
+  });
+  $("#x-download").addEventListener("click", () => {
+    try {
+      const url = URL.createObjectURL(new Blob([exportFile.text], { type: exportFile.mime }));
+      const a = document.createElement("a"); a.href = url; a.download = exportFile.filename; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+      toast("Download started. If nothing saved, use Copy instead");
+    } catch (e) { toast("Download isn't available here. Use Copy instead"); }
+  });
+  $("#restore-file").addEventListener("change", async e => {
+    const f = e.target.files[0]; if (!f) return;
+    try {
+      const data = JSON.parse(await f.text());
+      if (!Array.isArray(data.clients) || !Array.isArray(data.projects) || !Array.isArray(data.entries)) throw new Error("bad");
+      S = Object.assign(blank(), data); save(); renderAll(); toast(`Restored ${S.entries.length} entries`);
+    } catch (err) { toast("That file isn't an Imler Hours backup"); }
+    e.target.value = "";
+  });
+  $("#clear-examples").addEventListener("click", () => { S = blank(); save(); renderAll(); toast("Cleared. Add your first client to begin"); showTab("clients"); $("#c-name").focus(); });
+
+  // ---------- tabs ----------
+  function showTab(name) {
+    if (!["track", "reports", "clients"].includes(name)) name = "track";
+    $$("[data-view]").forEach(v => v.hidden = v.dataset.view !== name);
+    $$("nav.tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === name)));
+    try { history.replaceState(null, "", "#" + name); } catch (e) {}
+    if (name === "reports") renderReports();
+  }
+  $$("nav.tabs button").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
+  $(".brand").addEventListener("click", e => { e.preventDefault(); showTab("track"); });
+
+  // ---------- render ----------
+  function renderAll() {
+    renderTimer(); renderTotals();
+    fillProjectSelect($("#m-project"), $("#m-project").value && $("#m-project").value !== "__new" ? $("#m-project").value : S.lastProjectId);
+    renderRecent(); renderClients();
+    if (!$("[data-view='reports']").hidden) renderReports();
+  }
+  wireNewOption($("#t-project")); wireNewOption($("#m-project"));
+  // keep tabs in sync if the app is open in two windows
+  window.addEventListener("storage", e => { if (e.key === KEY) { S = load(); renderAll(); } });
+
+  renderAll();
+  showTab((location.hash || "").slice(1));
+})();
+</script>
+</body>
+</html>
