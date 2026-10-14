@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>October 2026 Conference Jeopardy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* Layout: a projected game board — category row, 6×5 value grid, team scores pinned below. Single deliberate dark look for a darkened room. */
+:root {
+  --ink: #0b1430;        /* page ground */
+  --board: #14245a;      /* tile face */
+  --board-hi: #1d3378;   /* tile hover */
+  --rule: #2b4396;       /* grid lines */
+  --gold: #f2c14e;       /* values, highlights */
+  --paper: #eef1fa;      /* main text */
+  --muted: #9aa7d1;      /* secondary text */
+  --good: #5fd39a;
+  --bad: #ff8a7a;
+  --display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--ink); color: var(--paper);
+  font-family: var(--body); margin: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 28px;
+}
+.wrap { max-width: 1200px; margin: 0 auto; display: grid; gap: 18px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; }
+h1 { font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: .02em; font-size: clamp(1.6rem, 4vw, 2.6rem); margin: 0; line-height: 1; text-wrap: balance; }
+h1 span { color: var(--gold); }
+.sub { font-family: var(--display); font-weight: 500; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; font-size: .95rem; }
+
+.board-scroll { overflow-x: auto; }
+.board {
+  display: grid; grid-template-columns: repeat(6, minmax(110px, 1fr));
+  gap: 4px; background: var(--rule); padding: 4px; border-radius: 6px; min-width: 680px;
+}
+.cat {
+  background: var(--board); display: flex; align-items: center; justify-content: center; text-align: center;
+  font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+  font-size: clamp(.95rem, 1.5vw, 1.2rem); line-height: 1.05; padding: 14px 8px; min-height: 86px; text-wrap: balance;
+  border-bottom: 3px solid var(--ink);
+}
+.tile {
+  background: var(--board); border: 0; color: var(--gold); cursor: pointer;
+  font-family: var(--display); font-weight: 800; font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  min-height: 78px; text-shadow: 0 2px 0 #000a; transition: background .15s;
+  font-variant-numeric: tabular-nums;
+}
+.tile:hover { background: var(--board-hi); }
+.tile:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.tile.used { color: transparent; text-shadow: none; background: #101c46; }
+.tile.used:hover { color: var(--muted); font-size: .9rem; }
+.tile.used:hover::after { content: "Reopen"; }
+
+.scores { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.team { background: var(--board); border-radius: 6px; padding: 10px 12px; display: grid; gap: 4px; min-width: 0; }
+.team input { background: transparent; border: 0; border-bottom: 1px dashed var(--rule); color: var(--paper); font-family: var(--display); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; width: 100%; padding: 2px 0; }
+.team .pts { font-family: var(--display); font-weight: 800; font-size: 2rem; color: var(--gold); font-variant-numeric: tabular-nums; }
+.team .pts.neg { color: var(--bad); }
+.team .adj { display: flex; gap: 6px; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.btn { font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: .95rem; border-radius: 4px; padding: 8px 14px; cursor: pointer; border: 1px solid var(--rule); background: transparent; color: var(--paper); }
+.btn:hover { border-color: var(--gold); }
+.btn.primary { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.btn.sm { padding: 4px 9px; font-size: .85rem; }
+.note { color: var(--muted); font-size: .85rem; }
+
+/* Clue overlay */
+.overlay { position: fixed; inset: 0; background: #060b1fee; display: flex; align-items: center; justify-content: center; z-index: 10;
+  padding: calc(16px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.card { background: var(--board); border: 4px solid var(--rule); border-radius: 8px; width: min(980px, 100%); max-height: 100%; overflow-y: auto; padding: clamp(18px, 4vw, 40px); display: grid; gap: 20px; }
+.card .meta { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--display); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
+.card .meta b { color: var(--gold); font-weight: 800; }
+.clue { font-family: var(--body); font-size: clamp(1.35rem, 3.2vw, 2.3rem); line-height: 1.3; text-align: center; text-wrap: balance; margin: 0; }
+.answer { text-align: center; display: grid; gap: 6px; border-top: 1px solid var(--rule); padding-top: 16px; }
+.answer .a { font-family: var(--display); font-weight: 800; font-size: clamp(1.6rem, 3.6vw, 2.6rem); color: var(--gold); text-transform: uppercase; letter-spacing: .02em; text-wrap: balance; }
+.answer .src { color: var(--muted); font-size: .95rem; font-style: italic; }
+.award { display: grid; gap: 8px; }
+.award-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; justify-content: space-between; border-top: 1px solid var(--rule); padding-top: 8px; }
+.award-row .nm { font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.award-row .acts { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.award-row input[type=number] { width: 96px; background: var(--ink); color: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: 5px 8px; font-family: var(--display); font-size: 1rem; }
+.btn.right { border-color: var(--good); color: var(--good); }
+.btn.wrong { border-color: var(--bad); color: var(--bad); }
+.btn.on.right { background: var(--good); color: var(--ink); }
+.btn.on.wrong { background: var(--bad); color: var(--ink); }
+.card-foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.dd { text-align: center; font-family: var(--display); font-weight: 800; font-size: clamp(2.4rem, 7vw, 4.5rem); color: var(--gold); text-transform: uppercase; letter-spacing: .04em; line-height: 1; }
+@media (prefers-reduced-motion: no-preference) { .card { animation: pop .22s ease-out; } @keyframes pop { from { transform: scale(.92); opacity: .4; } } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1>General Conference <span>Jeopardy</span></h1>
+    <div class="sub">196th Semiannual · October 3–4, 2026</div>
+  </header>
+
+  <div class="board-scroll"><div class="board" id="board" role="grid" aria-label="Game board"></div></div>
+
+  <div class="scores" id="scores"></div>
+
+  <div class="controls">
+    <button class="btn primary" id="finalBtn" type="button">Final Jeopardy</button>
+    <button class="btn" id="addTeam" type="button">Add team</button>
+    <button class="btn" id="removeTeam" type="button">Remove team</button>
+    <button class="btn" id="resetBtn" type="button">New game</button>
+    <span class="note">One Daily Double is hidden on the board. In a clue: Space reveals the answer, Esc returns to the board.</span>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="card" role="dialog" aria-modal="true" aria-labelledby="clueText" id="card"></div>
+</div>
+
+<script>
+const CATS = [
+  { name: "Who Said It?", clues: [
+    ["This apostle, who learned to fly gliders as a teen, called the Savior our “ever-rising air.”", "Who is Elder Patrick Kearon?", "“Jesus Lives to Lift,” Saturday afternoon"],
+    ["A former cardiologist, this apostle told of a heart-transplant patient who complained his hospital oatmeal was too cold.", "Who is Elder Dale G. Renlund?", "“How Long Will It Be Ere They Believe Me,” Saturday afternoon"],
+    ["This counselor in the First Presidency declared that gambling is morally wrong because it seeks something for nothing at others’ expense.", "Who is President D. Todd Christofferson?", "“O Be Wise,” Saturday morning"],
+    ["This Young Women leader said the gospel isn’t an umbrella that keeps the rain off, but the solid rock we stand on in the storm.", "Who is Sister Tamara W. Runia?", "“The Sculpting of Our Souls,” Saturday morning"],
+    ["This Seventy and former BYU football star told of his Tongan grandparents, who sailed to hear apostle Matthew Cowley even after burying their infant son.", "Who is Elder Vaiangina Sikahema?", "“Prophets, Seers and Revelators,” Saturday morning"]
+  ]},
+  { name: "Stories From the Pulpit", clues: [
+    ["Sister Spannaus said this device sent her the wrong way, but her husband could guide her once he knew exactly where she was.", "What is a GPS?", "Sister Andrea Muñoz Spannaus, “God Is at Your Side”"],
+    ["Elder Sinclair watched a little girl quietly fix this, after a boy named James buttoned it to his lapel during a Primary program.", "What is his jacket sleeve?", "Elder Paul H. Sinclair, “Quick to Help, Slow to Judge”"],
+    ["Elder Michael A. Dunn finished a footrace of this distance because his friend Ted carried his water pack.", "What is 100 miles?", "Elder Michael A. Dunn, Saturday afternoon"],
+    ["Elder Bednar told of a traveler turned away at a border because this document was damaged.", "What is a passport?", "Elder David A. Bednar, “Sealed by the Holy Spirit of Promise”"],
+    ["Elder Dube recalled President Oaks asking that a sign reading this be taken down from a mission office gate.", "What is “Trespassers will be prosecuted”?", "Elder Edward Dube, “Come Unto Christ”"]
+  ]},
+  { name: "Temples & Covenants", clues: [
+    ["President Oaks announced this temple will open to the public on April 5, 2027, its first public opening since 1893.", "What is the Salt Lake Temple?", "President Dallin H. Oaks, concluding remarks"],
+    ["Elder Gong said ordinances and covenants aren’t “big” or this, so we should never describe a temple that way.", "What is small?", "Elder Gerrit W. Gong, “Come to the Lord in His Holy House”"],
+    ["Elder Bednar taught that every ordinance and covenant must ultimately be ratified by this.", "What is the Holy Spirit of Promise?", "Elder David A. Bednar, “Sealed by the Holy Spirit of Promise”"],
+    ["Raised in the Community of Christ, Elder Jeremiah J. Morgan later learned his ancestors made temple covenants in this Illinois city.", "What is Nauvoo?", "Elder Jeremiah J. Morgan, “The Infinite Power of God in Our Covenants”"],
+    ["Elder Bednar contrasted a sealing’s “lateral” tie between spouses with this aspect, which connects a person to God’s eternal family.", "What is the vertical aspect?", "Elder David A. Bednar, “Sealed by the Holy Spirit of Promise”"]
+  ]},
+  { name: "Fasts, Tithes & Bets", clues: [
+    ["Elder Soares built “A Higher and Holier Fast” on the teachings of this Old Testament prophet.", "Who is Isaiah?", "Elder Ulisses Soares, “A Higher and Holier Fast”"],
+    ["President Christofferson said this device turned gambling into something available constantly, privately and almost anywhere.", "What is the smartphone?", "President D. Todd Christofferson, “O Be Wise”"],
+    ["Elder Villanueva compared his mother’s tithing faith to this widow, who fed Elijah with her last meal.", "Who is the widow of Zarephath?", "Elder Moisés Villanueva, “Prove Me Now Herewith”"],
+    ["President Christofferson joked that prediction markets could even take bets on the timing of this event, then asked where you would collect.", "What is the Second Coming?", "President D. Todd Christofferson, “O Be Wise”"],
+    ["Elder Giuffra taught that paying tithing is evidence we accept this law.", "What is the law of sacrifice?", "Elder Patricio M. Giuffra, “Trusting the Lord Through Tithes and Offerings”"]
+  ]},
+  { name: "Peacemakers", clues: [
+    ["President Chibota taught this Southern African greeting, which means “I see you.”", "What is sawubona?", "President Rosemary K. Chibota, “A Child of God”"],
+    ["Elder Sinclair taught that a true disciple of Jesus Christ is quick to help and this.", "What is slow to judge?", "Elder Paul H. Sinclair, “Quick to Help, Slow to Judge”"],
+    ["Elder Gilbert said standing for truth takes courage, but standing for truth with this takes even more.", "What is love?", "Elder Clark G. Gilbert, “Teach Truth With Love”"],
+    ["Elder Kyungu said we can bury the language of contention, just as these converted people buried their weapons of war.", "Who are the converted Lamanites (Anti-Nephi-Lehies)?", "Elder Alfred Kyungu, “Using the Language of Peacemakers”"],
+    ["Elder Schmeil’s title, “Consider Your Ways,” comes from this prophet’s call to rebuild the neglected temple.", "Who is Haggai?", "Elder Ciro Schmeil, “Consider Your Ways, and From This Day Will I Bless You”"]
+  ]},
+  { name: "By the Numbers", clues: [
+    ["The number of general sessions held at the October 2026 conference.", "What is 4?", "Conference schedule, Oct. 3–4, 2026"],
+    ["Brother Reid said Sunday lessons of this many minutes are not a limitation but an invitation.", "What is 25?", "Brother Gabriel W. Reid, “You Are Good Enough To Teach”"],
+    ["Elder Gong said this many temples will be dedicated this year, with one more rededicated.", "What is 21?", "Elder Gerrit W. Gong, “Come to the Lord in His Holy House”"],
+    ["President Uchtdorf said that after the Savior’s visit, Nephites and Lamanites lived in unity for this many years.", "What is 200?", "President Dieter F. Uchtdorf, “Christ-centered Unity”"],
+    ["The record number of talks given at this conference, by 36 different speakers.", "What is 37?", "Conference total, as reported after the Sunday sessions"]
+  ]}
+];
+const FINAL = {
+  cat: "The Prophet’s Counsel",
+  clue: "In the Sunday morning session, President Oaks counseled members to “hold on to” this, even if something else is uncertain.",
+  answer: "What is the first article of faith?",
+  src: "President Dallin H. Oaks, “The Gospel of Jesus Christ Is for All”"
+};
+const VALUES = [100, 200, 300, 400, 500];
+
+let state;
+function freshState(teamNames) {
+  // Daily Double: any category, 300–500 row
+  const dd = [Math.floor(Math.random() * 6), 2 + Math.floor(Math.random() * 3)];
+  return {
+    teams: (teamNames || ["Team 1", "Team 2", "Team 3"]).map(n => ({ name: n, score: 0 })),
+    used: {},      // "c-r": true
+    marks: {},     // "c-r": {teamIdx: +1|-1}
+    dd
+  };
+}
+try { state = JSON.parse(localStorage.getItem("gcj-oct26")) || null; } catch (e) { state = null; }
+if (!state || !state.teams) state = freshState();
+const save = () => { try { localStorage.setItem("gcj-oct26", JSON.stringify(state)); } catch (e) {} };
+
+const boardEl = document.getElementById("board");
+const scoresEl = document.getElementById("scores");
+const overlay = document.getElementById("overlay");
+const card = document.getElementById("card");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+function renderBoard() {
+  let html = CATS.map(c => `<div class="cat" role="columnheader">${esc(c.name)}</div>`).join("");
+  for (let r = 0; r < 5; r++) {
+    for (let c = 0; c < 6; c++) {
+      const k = c + "-" + r, used = state.used[k];
+      html += `<button type="button" class="tile${used ? " used" : ""}" data-c="${c}" data-r="${r}" aria-label="${esc(CATS[c].name)} for ${VALUES[r]}${used ? ", already played" : ""}">${used ? "" : VALUES[r]}</button>`;
+    }
+  }
+  boardEl.innerHTML = html;
+}
+function renderScores() {
+  scoresEl.innerHTML = state.teams.map((t, i) => `
+    <div class="team">
+      <input id="team-${i}" value="${esc(t.name)}" aria-label="Team ${i + 1} name" data-i="${i}">
+      <div class="pts${t.score < 0 ? " neg" : ""}">${t.score.toLocaleString()}</div>
+      <div class="adj">
+        <button class="btn sm" type="button" data-adj="${i}" data-v="-100" aria-label="Subtract 100 from ${esc(t.name)}">−100</button>
+        <button class="btn sm" type="button" data-adj="${i}" data-v="100" aria-label="Add 100 to ${esc(t.name)}">+100</button>
+      </div>
+    </div>`).join("");
+}
+scoresEl.addEventListener("input", e => { if (e.target.dataset.i != null) { state.teams[+e.target.dataset.i].name = e.target.value; save(); } });
+scoresEl.addEventListener("click", e => {
+  const b = e.target.closest("[data-adj]"); if (!b) return;
+  state.teams[+b.dataset.adj].score += +b.dataset.v; save(); renderScores();
+});
+
+let current = null; // {c, r, value, isDD, revealed}
+function openClue(c, r) {
+  const isDD = state.dd[0] === c && state.dd[1] === r && !state.used[c + "-" + r];
+  current = { c, r, value: VALUES[r], isDD, revealed: false, stage: isDD ? "dd" : "clue" };
+  overlay.hidden = false;
+  drawCard();
+}
+function drawCard() {
+  const { c, r } = current;
+  const [q, a, src] = CATS[c].clues[r];
+  const k = c + "-" + r, marks = state.marks[k] || {};
+  if (current.stage === "dd") {
+    card.innerHTML = `
+      <div class="meta"><span>${esc(CATS[c].name)}</span><b>${VALUES[r]}</b></div>
+      <div class="dd" id="clueText">Daily Double</div>
+      <p class="note" style="text-align:center;margin:0">The team in control may wager up to their score, or up to 500 if their score is lower. Enter the wager below, then show the clue.</p>
+      <div class="award-row" style="justify-content:center"><label class="nm" for="ddWager">Wager</label><input type="number" id="ddWager" min="0" step="100" value="${Math.max(500, ...state.teams.map(t => t.score))}"></div>
+      <div class="card-foot"><button class="btn" type="button" data-act="close">Back to board</button><button class="btn primary" type="button" data-act="showdd">Show the clue</button></div>`;
+    return;
+  }
+  card.innerHTML = `
+    <div class="meta"><span>${esc(CATS[c].name)}</span><b>${current.isDD ? "Daily Double · " : ""}${current.value}</b></div>
+    <p class="clue" id="clueText">${esc(q)}</p>
+    ${current.revealed ? `<div class="answer"><div class="a">${esc(a)}</div><div class="src">${esc(src)}</div></div>` : ""}
+    <div class="award">
+      ${state.teams.map((t, i) => `
+        <div class="award-row">
+          <span class="nm">${esc(t.name)}</span>
+          <span class="acts">
+            <button class="btn sm right${marks[i] === 1 ? " on" : ""}" type="button" data-mark="${i}" data-v="1">Correct +${current.value}</button>
+            <button class="btn sm wrong${marks[i] === -1 ? " on" : ""}" type="button" data-mark="${i}" data-v="-1">Wrong −${current.value}</button>
+          </span>
+        </div>`).join("")}
+    </div>
+    <div class="card-foot">
+      <button class="btn" type="button" data-act="close">Back to board</button>
+      ${current.revealed ? "" : `<button class="btn primary" type="button" data-act="reveal">Reveal answer</button>`}
+    </div>`;
+}
+card.addEventListener("click", e => {
+  const act = e.target.closest("[data-act]")?.dataset.act;
+  if (act === "close") return closeClue();
+  if (act === "reveal") { current.revealed = true; drawCard(); return; }
+  if (act === "showdd") {
+    const w = Math.max(0, parseInt(document.getElementById("ddWager").value, 10) || 0);
+    current.value = w; current.stage = "clue"; drawCard(); return;
+  }
+  const m = e.target.closest("[data-mark]");
+  if (m) {
+    const k = current.c + "-" + current.r, i = +m.dataset.mark, v = +m.dataset.v;
+    state.marks[k] = state.marks[k] || {};
+    const prev = state.marks[k][i] || 0;
+    const prevVal = state.marks[k]["v" + i] || current.value;
+    state.teams[i].score -= prev * prevVal;           // undo prior mark
+    if (prev === v) { delete state.marks[k][i]; delete state.marks[k]["v" + i]; }
+    else { state.marks[k][i] = v; state.marks[k]["v" + i] = current.value; state.teams[i].score += v * current.value; }
+    state.used[k] = true; save(); renderScores(); drawCard();
+  }
+});
+function closeClue() {
+  if (current && current.stage !== "dd" && !current.final) state.used[current.c + "-" + current.r] = true;
+  overlay.hidden = true; current = null; save(); renderBoard();
+}
+boardEl.addEventListener("click", e => {
+  const t = e.target.closest(".tile"); if (t) openClue(+t.dataset.c, +t.dataset.r);
+});
+overlay.addEventListener("click", e => { if (e.target === overlay) closeClue(); });
+document.addEventListener("keydown", e => {
+  if (overlay.hidden || !current) return;
+  if (e.key === "Escape") closeClue();
+  if (e.key === " " && document.activeElement.tagName !== "INPUT" && current.stage === "clue" && !current.revealed) {
+    e.preventDefault(); current.revealed = true; current.final ? drawFinal() : drawCard();
+  }
+});
+
+// Final Jeopardy
+function openFinal() {
+  current = { final: true, stage: "clue", revealed: false, wagers: state.teams.map(() => 0), marks: {} };
+  overlay.hidden = false; drawFinal();
+}
+function drawFinal() {
+  card.innerHTML = `
+    <div class="meta"><span>Final Jeopardy</span><b>${esc(FINAL.cat)}</b></div>
+    <p class="clue" id="clueText">${esc(FINAL.clue)}</p>
+    ${current.revealed ? `<div class="answer"><div class="a">${esc(FINAL.answer)}</div><div class="src">${esc(FINAL.src)}</div></div>` : ""}
+    <div class="award">
+      ${state.teams.map((t, i) => `
+        <div class="award-row">
+          <span class="nm">${esc(t.name)} · ${t.score.toLocaleString()}</span>
+          <span class="acts">
+            <label class="note" for="fw-${i}">Wager</label>
+            <input type="number" id="fw-${i}" min="0" step="100" value="${current.wagers[i]}" data-w="${i}">
+            <button class="btn sm right${current.marks[i] === 1 ? " on" : ""}" type="button" data-fm="${i}" data-v="1">Correct</button>
+            <button class="btn sm wrong${current.marks[i] === -1 ? " on" : ""}" type="button" data-fm="${i}" data-v="-1">Wrong</button>
+          </span>
+        </div>`).join("")}
+    </div>
+    <div class="card-foot">
+      <button class="btn" type="button" data-fact="close">Back to board</button>
+      ${current.revealed ? "" : `<button class="btn primary" type="button" data-fact="reveal">Reveal answer</button>`}
+    </div>`;
+}
+card.addEventListener("input", e => { if (current?.final && e.target.dataset.w != null) current.wagers[+e.target.dataset.w] = Math.max(0, parseInt(e.target.value, 10) || 0); });
+card.addEventListener("click", e => {
+  if (!current?.final) return;
+  const f = e.target.closest("[data-fact]")?.dataset.fact;
+  if (f === "close") { overlay.hidden = true; current = null; return; }
+  if (f === "reveal") { current.revealed = true; drawFinal(); return; }
+  const m = e.target.closest("[data-fm]");
+  if (m) {
+    const i = +m.dataset.fm, v = +m.dataset.v, prev = current.marks[i] || 0, pw = current["pw" + i] || 0;
+    state.teams[i].score -= prev * pw;
+    if (prev === v) { delete current.marks[i]; }
+    else { current.marks[i] = v; current["pw" + i] = current.wagers[i]; state.teams[i].score += v * current.wagers[i]; }
+    save(); renderScores(); drawFinal();
+  }
+});
+
+document.getElementById("finalBtn").onclick = openFinal;
+document.getElementById("addTeam").onclick = () => { if (state.teams.length < 6) { state.teams.push({ name: "Team " + (state.teams.length + 1), score: 0 }); save(); renderScores(); } };
+document.getElementById("removeTeam").onclick = () => { if (state.teams.length > 1) { state.teams.pop(); save(); renderScores(); } };
+const resetBtn = document.getElementById("resetBtn");
+resetBtn.onclick = () => {
+  if (resetBtn.dataset.confirm) { state = freshState(state.teams.map(t => t.name)); save(); renderBoard(); renderScores(); resetBtn.textContent = "New game"; delete resetBtn.dataset.confirm; }
+  else { resetBtn.textContent = "Tap again to reset"; resetBtn.dataset.confirm = "1"; setTimeout(() => { resetBtn.textContent = "New game"; delete resetBtn.dataset.confirm; }, 3000); }
+};
+
+renderBoard(); renderScores();
+</script>
+</body>
+</html>
